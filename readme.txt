@@ -1,4 +1,4 @@
-=== My Plugin ===
+=== CC Child Pages ===
 
 Plugin Name: CC Child Pages
 Contributors: caterhamcomputing
