@@ -36,6 +36,7 @@ This would show the Child Pages for the current page in 2 columns.
 
 You can add the `cols` parameter to choose the number of columns:
 
+`[child_pages cols="1"]`
 `[child_pages cols="2"]`
 `[child_pages cols="3"]`
 `[child_pages cols="4"]`
