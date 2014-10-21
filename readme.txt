@@ -41,7 +41,7 @@ You can add the `cols` parameter to choose the number of columns:
 `[child_pages cols="3"]`
 `[child_pages cols="4"]`
 
-... if `cols` is set to anything other than 2, 3 or 4 the value will be ignored.
+... if `cols` is set to anything other than 1, 2, 3 or 4 the value will be ignored.
 
 You can also show the child pages of a specific page by adding the `ID` of the page as follows:
 
