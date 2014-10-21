@@ -17,6 +17,7 @@ class ccchildpages {
 			'id'	=> get_the_ID(),
 			'cols'	=> '3',
 			'skin'	=> 'simple',
+			'class'	=> '',
 		), $atts );
 		
 		switch ( $a['cols'] ) {
@@ -28,15 +29,31 @@ class ccchildpages {
 				$class = 'threecol';
 				$cols = 3;
 				break;
+			case '1':
+				$class = 'onecol';
+				$cols = 1;
+				break;
 			default:
 				$class = 'twocol';
 				$cols = 2;
 		}
 		
 		switch ( $a['skin'] ) {
+			case 'red':
+				$skin = 'ccred';
+				break;
+			case 'green':
+				$skin = 'ccgreen';
+				break;
+			case 'blue':
+				$skin = 'ccblue';
+				break;
 			default:
 				$skin = 'simple';
 		}
+		
+		// if class is specified, substitue value for skin class
+		if ( $a['class'] != '' ) $skin = trim(htmlentities($a['class']));
 		
 		$return_html = '<div class="ccchildpages ' . $class .' ' . $skin . ' ccclearfix">';
 		
@@ -104,7 +121,7 @@ class ccchildpages {
 				'ccchildpagescss',
 				$css_file,
 				false,
-				0.1
+				1.1
 			);
 			wp_enqueue_style( 'ccchildpagescss' );
 		}
