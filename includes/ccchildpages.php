@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = 1.2;
+	const plugin_version = '1.3';
 
 	public static function show_child_pages( $atts ) {
 		$a = shortcode_atts( array(
@@ -86,6 +86,8 @@ class ccchildpages {
 		
 			$page_count = 0;		
 
+			$return_html .= '<ul>';
+
 			while ( $parent->have_posts() ) {
 			
 				$parent->the_post();
@@ -103,13 +105,11 @@ class ccchildpages {
 				}
 			
 				$link = get_permalink(get_the_ID());
-			
-				$return_html .= '<ul>';
-			
+						
 				$return_html .= '<li><a href="' . $link . '" title="' . htmlentities(get_the_title()) . '">' . htmlentities(get_the_title()) . '</a></li>';
 			
-				$return_html .= '</ul>';
 			}
+			$return_html .= '</ul>';
 		}
 		else {				
 			$args = array(

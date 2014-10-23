@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0
-Stable tag: 1.2
-Version: 1.2
+Stable tag: 1.3
+Version: 1.3
 Tags: child, pages, shortcode, sub-pages, subpages, sub-page, subpage
 
 == Description ==
@@ -75,6 +75,9 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 9. Show child pages as a list: `[child_pages list="true"]`
 
 == Changelog ==
+
+= 1.3 =
+* Corrected small error when using `list` parameter
 
 = 1.2 =
 * Added the `list` parameter
