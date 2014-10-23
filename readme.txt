@@ -60,6 +60,15 @@ If you want to style the child page boxes yourself, you can also specify the `cl
 
 == Screenshots ==
 
+1. One column: `[child_pages cols="1"]`
+2. Two columns (default): `[child_pages]` or `[child_pages cols="2"]`
+3. Three columns: `[child_pages cols="3"]`
+4. Four columns: `[child_pages cols="4"]`
+5. Skin for Red colour schemes: `[child_pages skin="red"]`
+6. Skin for Green colour schemes: `[child_pages skin="green"]`
+7. Skin for Blue colour schemes: `[child_pages skin="blue"]`
+8. Custom class defined for custom styling: `[child_pages class="myclass"]`
+
 == Changelog ==
 
 = 1.1 =
