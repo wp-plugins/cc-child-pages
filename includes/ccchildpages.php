@@ -12,12 +12,16 @@ class ccchildpages {
 	// Plugin name
 	const plugin_name = 'CC Child Pages';
 
+	// Plugin version
+	const plugin_version = 1.2;
+
 	public static function show_child_pages( $atts ) {
 		$a = shortcode_atts( array(
 			'id'	=> get_the_ID(),
 			'cols'	=> '3',
 			'skin'	=> 'simple',
 			'class'	=> '',
+			'list'	=> 'false',
 		), $atts );
 		
 		switch ( $a['cols'] ) {
@@ -52,59 +56,108 @@ class ccchildpages {
 				$skin = 'simple';
 		}
 		
+		if ( strtolower(trim($a['list'])) == 'true' ) {
+			$list = TRUE;
+		}
+		else {
+			$list = FALSE;
+		}
+		
 		// if class is specified, substitue value for skin class
 		if ( $a['class'] != '' ) $skin = trim(htmlentities($a['class']));
 		
 		$return_html = '<div class="ccchildpages ' . $class .' ' . $skin . ' ccclearfix">';
-		
+
 		$page_id = $a['id'];
-				
-		$args = array(
-			'post_type'      => 'page',
-			'posts_per_page' => -1,
-			'post_parent'    => $page_id,
-			'order'          => 'ASC',
-			'orderby'        => 'menu_order',
-			'post_status' => 'publish'
-		);
 
-		$parent = new WP_Query( $args );
+		if ( $list ) {	
+			$args = array(
+				'post_type'      => 'page',
+				'posts_per_page' => -1,
+				'post_parent'    => $page_id,
+				'order'          => 'ASC',
+				'orderby'        => 'menu_order',
+				'post_status' => 'publish'
+			);
+
+			$parent = new WP_Query( $args );
 		
-		if ( ! $parent->have_posts() ) return '';
+			if ( ! $parent->have_posts() ) return '';
 		
-		$page_count = 0;		
+			$page_count = 0;		
 
-		while ( $parent->have_posts() ) {
+			while ( $parent->have_posts() ) {
 			
-			$parent->the_post();
+				$parent->the_post();
 			
-			$page_count++;
+				$page_count++;
 			
-			if ( $page_count%$cols == 0 ) {
-				$page_class = ' cclast';
+				if ( $page_count%$cols == 0 ) {
+					$page_class = ' cclast';
+				}
+				else if ( $page_count%$cols == 1 ) {
+					$page_class = ' ccfirst';
+				}
+				else {
+					$page_class = '';
+				}
+			
+				$link = get_permalink(get_the_ID());
+			
+				$return_html .= '<ul>';
+			
+				$return_html .= '<li><a href="' . $link . '" title="' . htmlentities(get_the_title()) . '">' . htmlentities(get_the_title()) . '</a></li>';
+			
+				$return_html .= '</ul>';
 			}
-			else if ( $page_count%$cols == 1 ) {
-				$page_class = ' ccfirst';
-			}
-			else {
-				$page_class = '';
-			}
-			
-			$link = get_permalink(get_the_ID());
-			
-			$return_html .= '<div class="ccchildpage' . $page_class . '">';
-			
-			$return_html .= '<h3>' . htmlentities(get_the_title()) . '</h3>';
-			
-//			$page_excerpt = wp_trim_words(strip_shortcodes(do_shortcode(get_the_content())),35);
+		}
+		else {				
+			$args = array(
+				'post_type'      => 'page',
+				'posts_per_page' => -1,
+				'post_parent'    => $page_id,
+				'order'          => 'ASC',
+				'orderby'        => 'menu_order',
+				'post_status' => 'publish'
+			);
 
-			$page_excerpt = get_the_excerpt();
+			$parent = new WP_Query( $args );
+		
+			if ( ! $parent->have_posts() ) return '';
+		
+			$page_count = 0;		
+
+			while ( $parent->have_posts() ) {
 			
-			$return_html .= '<p class="ccpages_excerpt">' . strip_tags($page_excerpt) . '</p>';
+				$parent->the_post();
 			
-			$return_html .= '<p class="ccpages_more"><a href="' . $link . '" title="Read more...">Read more ...</a></p>';
+				$page_count++;
 			
-			$return_html .= '</div>';
+				if ( $page_count%$cols == 0 ) {
+					$page_class = ' cclast';
+				}
+				else if ( $page_count%$cols == 1 ) {
+					$page_class = ' ccfirst';
+				}
+				else {
+					$page_class = '';
+				}
+			
+				$link = get_permalink(get_the_ID());
+			
+				$return_html .= '<div class="ccchildpage' . $page_class . '">';
+			
+				$return_html .= '<h3>' . htmlentities(get_the_title()) . '</h3>';
+
+				$page_excerpt = get_the_excerpt();
+			
+				$return_html .= '<p class="ccpages_excerpt">' . strip_tags($page_excerpt) . '</p>';
+			
+				$return_html .= '<p class="ccpages_more"><a href="' . $link . '" title="Read more...">Read more ...</a></p>';
+			
+				$return_html .= '</div>';
+			}
+		
 		}	
 
 		$return_html .= '</div>';
@@ -121,7 +174,7 @@ class ccchildpages {
 				'ccchildpagescss',
 				$css_file,
 				false,
-				1.1
+				plugin_version
 			);
 			wp_enqueue_style( 'ccchildpagescss' );
 		}

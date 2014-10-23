@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0
-Stable tag: 1.1
-Version: 1.1
+Stable tag: 1.2
+Version: 1.2
 Tags: child, pages, shortcode, sub-pages, subpages, sub-page, subpage
 
 == Description ==
@@ -58,6 +58,10 @@ If you want to style the child page boxes yourself, you can also specify the `cl
 
 `[child_pages class="myclass"]`
 
+Finally, you can also display just an unordered list (`<ul>`) of child pages by adding the `list` parameter. In this case, all other paremeters are ignored **except for `class`**.
+
+`[child_pages list="true"]`
+
 == Screenshots ==
 
 1. One column: `[child_pages cols="1"]`
@@ -68,8 +72,12 @@ If you want to style the child page boxes yourself, you can also specify the `cl
 6. Skin for Green colour schemes: `[child_pages skin="green"]`
 7. Skin for Blue colour schemes: `[child_pages skin="blue"]`
 8. Custom class defined for custom styling: `[child_pages class="myclass"]`
+9. Show child pages as a list: `[child_pages list="true"]`
 
 == Changelog ==
+
+= 1.2 =
+* Added the `list` parameter
 
 = 1.1 =
 * Added the `skin` parameter
