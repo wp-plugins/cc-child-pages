@@ -58,7 +58,7 @@ If you want to style the child page boxes yourself, you can also specify the `cl
 
 `[child_pages class="myclass"]`
 
-Finally, you can also display just an unordered list (`<ul>`) of child pages by adding the `list` parameter. In this case, all other paremeters are ignored **except for `class`**.
+Finally, you can also display just an unordered list (`<ul>`) of child pages by adding the `list` parameter. In this case, all other paremeters are ignored **except for `class` and `id`**.
 
 `[child_pages list="true"]`
 
