@@ -13,7 +13,11 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.3';
+	const plugin_version = '1.4';
+	
+	public static function load_plugin_textdomain() {
+		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+	}
 
 	public static function show_child_pages( $atts ) {
 		$a = shortcode_atts( array(
@@ -22,6 +26,7 @@ class ccchildpages {
 			'skin'	=> 'simple',
 			'class'	=> '',
 			'list'	=> 'false',
+			'more'	=> __('Read more ...', 'cc-child-pages'),
 		), $atts );
 		
 		switch ( $a['cols'] ) {
@@ -62,6 +67,8 @@ class ccchildpages {
 		else {
 			$list = FALSE;
 		}
+		
+		$more = htmlentities(trim($a['more']));
 		
 		// if class is specified, substitue value for skin class
 		if ( $a['class'] != '' ) $skin = trim(htmlentities($a['class']));
@@ -153,7 +160,7 @@ class ccchildpages {
 			
 				$return_html .= '<p class="ccpages_excerpt">' . strip_tags($page_excerpt) . '</p>';
 			
-				$return_html .= '<p class="ccpages_more"><a href="' . $link . '" title="Read more...">Read more ...</a></p>';
+				$return_html .= '<p class="ccpages_more"><a href="' . $link . '" title="' . $more . '">' . $more . '.</a></p>';
 			
 				$return_html .= '</div>';
 			}

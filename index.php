@@ -4,7 +4,9 @@ Plugin Name: CC Child Pages
 Plugin URI: http://ccchildpages.ccplugins.co.uk/
 Description: Show links to child pages
 Author: Tim lomas
-Version: 1.3
+Text Domain: cc-child-pages
+Domain Path: /languages
+Version: 1.4
 Author URI: http://www.caterhamcomputing.net/
 */
 include_once('includes/ccchildpages.php');

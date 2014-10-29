@@ -8,7 +8,7 @@ Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0
 Stable tag: 1.3
-Version: 1.3
+Version: 1.4
 Tags: child, pages, shortcode, sub-pages, subpages, sub-page, subpage
 
 == Description ==
