@@ -7,7 +7,7 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0
-Stable tag: 1.3
+Stable tag: 1.4
 Version: 1.4
 Tags: child, pages, shortcode, sub-pages, subpages, sub-page, subpage
 
@@ -75,6 +75,10 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 9. Show child pages as a list: `[child_pages list="true"]`
 
 == Changelog ==
+
+= 1.4 =
+* Added `more` parameter to override standard "Read more ..." text
+* Internationalisation ...
 
 = 1.3 =
 * Corrected small error when using `list` parameter

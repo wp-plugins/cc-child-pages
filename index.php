@@ -13,5 +13,6 @@ include_once('includes/ccchildpages.php');
 
 add_shortcode( 'child_pages', 'ccchildpages::show_child_pages' );
 add_action( 'wp_enqueue_scripts', 'ccchildpages::enqueue_styles' );
+add_action( 'plugins_loaded', 'ccchildpages::load_plugin_textdomain' );
 
 /*EOF*/

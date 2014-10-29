@@ -160,7 +160,7 @@ class ccchildpages {
 			
 				$return_html .= '<p class="ccpages_excerpt">' . strip_tags($page_excerpt) . '</p>';
 			
-				$return_html .= '<p class="ccpages_more"><a href="' . $link . '" title="' . $more . '">' . $more . '.</a></p>';
+				$return_html .= '<p class="ccpages_more"><a href="' . $link . '" title="' . $more . '">' . $more . '</a></p>';
 			
 				$return_html .= '</div>';
 			}
@@ -181,7 +181,7 @@ class ccchildpages {
 				'ccchildpagescss',
 				$css_file,
 				false,
-				plugin_version
+				self::plugin_version
 			);
 			wp_enqueue_style( 'ccchildpagescss' );
 		}
