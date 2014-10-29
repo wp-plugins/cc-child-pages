@@ -47,6 +47,10 @@ You can also show the child pages of a specific page by adding the `ID` of the p
 
 `[child_pages id="42"]`
 
+If you want to prefer to use text other than the standard "Read more ..." to link to the pages, this can be specified with the `more` parameter:
+
+`[child_pages more="More..."]`
+
 You can now also use the `skin` parameter to choose a colour scheme for the Child Pages as follows:
 
 `[child_pages skin="simple"]` (the default colour scheme)
