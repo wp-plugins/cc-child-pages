@@ -7,9 +7,9 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0
-Stable tag: 1.4
-Version: 1.4
-Tags: child, pages, shortcode, sub-pages, subpages, sub-page, subpage
+Stable tag: 1.5
+Version: 1.5
+Tags: child pages, child, pages, shortcode, sub-pages, subpages, sub-page, subpage, sub page
 
 == Description ==
 
@@ -51,6 +51,10 @@ If you want to prefer to use text other than the standard "Read more ..." to lin
 
 `[child_pages more="More..."]`
 
+You can display a thumbnail of the featured image for each page (if set) by setting the `thumbs` to `"true"`:
+
+`[child_pages thumbs="true"]`
+
 You can now also use the `skin` parameter to choose a colour scheme for the Child Pages as follows:
 
 `[child_pages skin="simple"]` (the default colour scheme)
@@ -79,6 +83,9 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 9. Show child pages as a list: `[child_pages list="true"]`
 
 == Changelog ==
+
+= 1.5 =
+* Added the `thumbs` parameter. If set to `"true"`, the featured image (if set) of a page will be shown.
 
 = 1.4 =
 * Added `more` parameter to override standard "Read more ..." text

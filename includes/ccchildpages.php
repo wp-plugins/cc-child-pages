@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.4';
+	const plugin_version = '1.5';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -26,6 +26,7 @@ class ccchildpages {
 			'skin'	=> 'simple',
 			'class'	=> '',
 			'list'	=> 'false',
+			'thumbs'	=> 'false',
 			'more'	=> __('Read more ...', 'cc-child-pages'),
 		), $atts );
 		
@@ -66,6 +67,13 @@ class ccchildpages {
 		}
 		else {
 			$list = FALSE;
+		}
+		
+		if ( strtolower(trim($a['thumbs'])) == 'true' ) {
+			$thumbs = TRUE;
+		}
+		else {
+			$thumbs = FALSE;
 		}
 		
 		$more = htmlentities(trim($a['more']));
@@ -155,6 +163,16 @@ class ccchildpages {
 				$return_html .= '<div class="ccchildpage' . $page_class . '">';
 			
 				$return_html .= '<h3>' . htmlentities(get_the_title()) . '</h3>';
+				
+				if ( $thumbs ) {
+					$thumb_attr = array(
+						'class'	=> "cc-child-pages-thumb",
+						'alt'	=> get_the_title(),
+						'title'	=> get_the_title(),
+					);
+					
+					$return_html .= get_the_post_thumbnail(get_the_ID(), 'medium', $thumb_attr);
+				}
 
 				$page_excerpt = get_the_excerpt();
 			
