@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.5';
+	const plugin_version = '1.6';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -28,6 +28,7 @@ class ccchildpages {
 			'list'	=> 'false',
 			'thumbs'	=> 'false',
 			'more'	=> __('Read more ...', 'cc-child-pages'),
+			'words'	=> 55,
 		), $atts );
 		
 		switch ( $a['cols'] ) {
@@ -174,9 +175,18 @@ class ccchildpages {
 					$return_html .= get_the_post_thumbnail(get_the_ID(), 'medium', $thumb_attr);
 				}
 
-				$page_excerpt = get_the_excerpt();
+				if ( has_excerpt() ) {
+					$page_excerpt = get_the_excerpt();
+				}
+				else {
+					$page_excerpt = strip_tags( wp_trim_excerpt() );
+				}
+				
+				$words = ( intval($a['words']) > 0 ? intval($a['words']) : 55 );
+				
+				$page_excerpt = wp_trim_words( $page_excerpt, $words );
 			
-				$return_html .= '<p class="ccpages_excerpt">' . strip_tags($page_excerpt) . '</p>';
+				$return_html .= '<p class="ccpages_excerpt">' . $page_excerpt . '</p>';
 			
 				$return_html .= '<p class="ccpages_more"><a href="' . $link . '" title="' . $more . '">' . $more . '</a></p>';
 			

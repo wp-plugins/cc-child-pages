@@ -7,9 +7,9 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0
-Stable tag: 1.5
-Version: 1.5
-Tags: child pages, child, pages, shortcode, sub-pages, subpages, sub-page, subpage, sub page
+Stable tag: 1.6
+Version: 1.6
+Tags: child pages shortcode, child page shortcode, child pages, child page, shortcode, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 == Description ==
 
@@ -55,6 +55,10 @@ You can display a thumbnail of the featured image for each page (if set) by sett
 
 `[child_pages thumbs="true"]`
 
+You can limit the length of the excerpt by specifying the `words` parameter:
+
+`[child_pages words="10"]`
+
 You can now also use the `skin` parameter to choose a colour scheme for the Child Pages as follows:
 
 `[child_pages skin="simple"]` (the default colour scheme)
@@ -66,7 +70,7 @@ If you want to style the child page boxes yourself, you can also specify the `cl
 
 `[child_pages class="myclass"]`
 
-Finally, you can also display just an unordered list (`<ul>`) of child pages by adding the `list` parameter. In this case, all other paremeters are ignored **except for `class` and `id`**.
+Finally, you can also display just an unordered list (`<ul>`) of child pages by adding the `list` parameter. In this case, all other parameters are ignored **except for `class` and `id`**.
 
 `[child_pages list="true"]`
 
@@ -84,6 +88,9 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 10. Using featured images as thumbnails: `[child_pages thumbs="true"]`
 
 == Changelog ==
+
+= 1.6 =
+* Added the `words` parameter. When set to a value greater than 0, the number of words in the excerpt will be trimmed if greater than the specified value.
 
 = 1.5 =
 * Added the `thumbs` parameter. If set to `"true"`, the featured image (if set) of a page will be shown.
