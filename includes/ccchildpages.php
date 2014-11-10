@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.6';
+	const plugin_version = '1.7';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -141,11 +141,13 @@ class ccchildpages {
 		
 			if ( ! $parent->have_posts() ) return '';
 		
-			$page_count = 0;		
+			$page_count = 0;
 
 			while ( $parent->have_posts() ) {
 			
 				$parent->the_post();
+				
+				$id = get_the_ID();
 			
 				$page_count++;
 			
@@ -158,8 +160,19 @@ class ccchildpages {
 				else {
 					$page_class = '';
 				}
+
+				if ( $page_count%2 == 0  ) {
+					$page_class .= ' cceven';
+				}
+				else {
+					$page_class .= ' ccodd';
+				}
+				
+				$page_class .= ' ccpage-count-' . $page_count;
+				$page_class .= ' ccpage-id-' . $id;
+				$page_class .= ' ccpage-' . self::the_slug($id);
 			
-				$link = get_permalink(get_the_ID());
+				$link = get_permalink($id);
 			
 				$return_html .= '<div class="ccchildpage' . $page_class . '">';
 			
@@ -172,14 +185,14 @@ class ccchildpages {
 						'title'	=> get_the_title(),
 					);
 					
-					$return_html .= get_the_post_thumbnail(get_the_ID(), 'medium', $thumb_attr);
+					$return_html .= get_the_post_thumbnail($id, 'medium', $thumb_attr);
 				}
 
 				if ( has_excerpt() ) {
 					$page_excerpt = get_the_excerpt();
 				}
 				else {
-					$page_excerpt = strip_tags( wp_trim_excerpt() );
+					$page_excerpt = strip_tags( wp_trim_excerpt(), '<p><strong><em><b><i>' );
 				}
 				
 				$words = ( intval($a['words']) > 0 ? intval($a['words']) : 55 );
@@ -213,6 +226,12 @@ class ccchildpages {
 			);
 			wp_enqueue_style( 'ccchildpagescss' );
 		}
+	}
+
+	function the_slug($id) {
+		$post_data = get_post($id, ARRAY_A);
+		$slug = $post_data['post_name'];
+		return $slug; 
 	}
 }
 

@@ -7,9 +7,11 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0
-Stable tag: 1.6
-Version: 1.6
-Tags: child pages shortcode, child page shortcode, child pages, child page, shortcode, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
+Stable tag: 1.7
+Version: 1.7
+Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
+
+Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
 
 == Description ==
 
@@ -26,7 +28,7 @@ You can choose between 1, 2, 3 & 4 column layouts.
 1. Upload the plugin to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
-== Using the shortcode ==
+= Using the shortcode =
 
 The simplest usage would be to use the shortcode with no parameters:
 
@@ -86,9 +88,14 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 8. Custom class defined for custom styling: `[child_pages class="myclass"]`
 9. Show child pages as a list: `[child_pages list="true"]`
 10. Using featured images as thumbnails: `[child_pages thumbs="true"]`
-11. Using the `words` parameter to limit the excerpt length
+11. Limit word count of excerpt: `[child_pages words="10"]`
 
 == Changelog ==
+
+= 1.7 =
+* Changed plugin author to show business name (Caterham Computing)
+* Added CC Child Pages widget
+* Added various new classes to help with custom CSS styling
 
 = 1.6 =
 * Added the `words` parameter. When set to a value greater than 0, the number of words in the excerpt will be trimmed if greater than the specified value.
@@ -112,3 +119,9 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 
 = 1.0 =
 * Initial Release
+
+== Upgrade Notice ==
+
+= 1.7 =
+Added new CC Child Pages Widget. Added lots of new classes to help with custom CSS styling.
+
