@@ -1,0 +1,63 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CC Child Pages\n"
+"POT-Creation-Date: 2014-11-10 16:29-0000\n"
+"PO-Revision-Date: 2014-11-10 16:38-0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/ccchildpages.php:30
+msgid "Read more ..."
+msgstr "Plus ..."
+
+#: includes/ccchildpages_widget.php:13
+msgid "CC Child Pages"
+msgstr "CC Pages Enfant"
+
+#: includes/ccchildpages_widget.php:14
+msgid "Displays current child pages as a menu"
+msgstr "Affiche pages enfants actuels comme un menu"
+
+#: includes/ccchildpages_widget.php:64
+msgid "New title"
+msgstr "Nouveau titre"
+
+#: includes/ccchildpages_widget.php:70
+msgid "Title:"
+msgstr "Titre:"
+
+#: includes/ccchildpages_widget.php:74
+msgid "Sort by:"
+msgstr "Trier par :"
+
+#: includes/ccchildpages_widget.php:76
+msgid "Page title"
+msgstr "Page de titre"
+
+#: includes/ccchildpages_widget.php:77
+msgid "Page order"
+msgstr "Ordre des pages"
+
+#: includes/ccchildpages_widget.php:78
+msgid "Page ID"
+msgstr "ID de page"
+
+#: includes/ccchildpages_widget.php:82
+msgid "Exclude:"
+msgstr "Exclure:"
+
+#: includes/ccchildpages_widget.php:84
+msgid "Page IDs, separated by commas."
+msgstr "ID de page, séparées par des virgules."
