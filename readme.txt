@@ -86,6 +86,7 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 8. Custom class defined for custom styling: `[child_pages class="myclass"]`
 9. Show child pages as a list: `[child_pages list="true"]`
 10. Using featured images as thumbnails: `[child_pages thumbs="true"]`
+11. Using the `words` parameter to limit the excerpt length
 
 == Changelog ==
 
