@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CC Child Pages\n"
-"POT-Creation-Date: 2014-11-10 16:29-0000\n"
-"PO-Revision-Date: 2014-11-10 16:38-0000\n"
+"POT-Creation-Date: 2014-11-17 15:46-0000\n"
+"PO-Revision-Date: 2014-11-17 15:52-0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -24,40 +24,63 @@ msgstr "Plus ..."
 
 #: includes/ccchildpages_widget.php:13
 msgid "CC Child Pages"
-msgstr "CC Pages Enfant"
+msgstr "CC Child Pages"
 
 #: includes/ccchildpages_widget.php:14
 msgid "Displays current child pages as a menu"
 msgstr "Affiche pages enfants actuels comme un menu"
 
-#: includes/ccchildpages_widget.php:64
+#: includes/ccchildpages_widget.php:69
 msgid "New title"
 msgstr "Nouveau titre"
 
-#: includes/ccchildpages_widget.php:70
+#: includes/ccchildpages_widget.php:77
 msgid "Title:"
 msgstr "Titre:"
 
-#: includes/ccchildpages_widget.php:74
+#: includes/ccchildpages_widget.php:81
 msgid "Sort by:"
-msgstr "Trier par :"
+msgstr "Trier par:"
 
-#: includes/ccchildpages_widget.php:76
+#: includes/ccchildpages_widget.php:83
 msgid "Page title"
 msgstr "Page de titre"
 
-#: includes/ccchildpages_widget.php:77
+#: includes/ccchildpages_widget.php:84
 msgid "Page order"
 msgstr "Ordre des pages"
 
-#: includes/ccchildpages_widget.php:78
+#: includes/ccchildpages_widget.php:85
 msgid "Page ID"
-msgstr "ID de page"
+msgstr "Page ID"
 
-#: includes/ccchildpages_widget.php:82
+#: includes/ccchildpages_widget.php:89
 msgid "Exclude:"
 msgstr "Exclure:"
 
-#: includes/ccchildpages_widget.php:84
+#: includes/ccchildpages_widget.php:91
 msgid "Page IDs, separated by commas."
 msgstr "ID de page, séparées par des virgules."
+
+#: includes/ccchildpages_widget.php:107
+msgid "Parent:"
+msgstr "Parent:"
+
+#: includes/ccchildpages_widget.php:110
+msgid "Depth:"
+msgstr "Depth:"
+
+#: includes/ccchildpages_widget.php:112
+msgid ""
+"<ul><li>0 - Pages and sub-pages displayed in hierarchical (indented) form "
+"(Default).</li><li>-1 - Pages in sub-pages displayed in flat (no indent) "
+"form.</li><li>1 - Show only top level Pages</li><li>2 - Value of 2 (or "
+"greater) specifies the depth (or level) to descend in displaying Pages.</"
+"li></ul>"
+msgstr ""
+"<ul > <li > 0 - . Pages et des sous- pages affichées sous forme hiérarchique "
+"( en retrait ) ( par défaut ) < / li> <li > -1 - . Pages dans la sous- pages "
+"affichées dans l'appartement ( pas de retrait ) forme < / li> <li > 1 - "
+"Afficher uniquement les pages de niveau supérieur < / li> <li > 2 - Valeur "
+"de 2 ( ou plus) spécifie la profondeur ( ou niveau ) à descendre dans "
+"l'affichage des pages < / li></ul>"

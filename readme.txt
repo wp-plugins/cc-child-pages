@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0
-Stable tag: 1.7
-Version: 1.7
+Stable tag: 1.8
+Version: 1.8
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -22,6 +22,14 @@ Child Pages are displayed in responsive boxes, and include the page title, an ex
 You can choose between 1, 2, 3 & 4 column layouts.
 
 3 & 4 column layouts will resize to a 2 column layout on small devices to ensure that they remain readable.
+
+= CC Child Pages widget =
+
+**CC Child Pages now also includes a widget for displaying child pages within your sidebars.**
+
+The widget can be set to show the children of the current page or a specific page.
+
+Pages can be sorted by their menu order, title or ID. You can also select the depth of pages to be displayed.
 
 == Installation ==
 
@@ -89,8 +97,13 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 9. Show child pages as a list: `[child_pages list="true"]`
 10. Using featured images as thumbnails: `[child_pages thumbs="true"]`
 11. Limit word count of excerpt: `[child_pages words="10"]`
+12. CC Child Pages widget options
 
 == Changelog ==
+
+= 1.8 =
+* CC Child Pages widget enhanced to allow display of children of current page or a specific page
+* CC Child Pages widget enhanced to allow depth to be specified
 
 = 1.7 =
 * Changed plugin author to show business name (Caterham Computing)

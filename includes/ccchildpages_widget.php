@@ -28,14 +28,19 @@ class ccchildpages_widget extends WP_Widget {
 
 		$sortby = empty( $instance['sortby'] ) ? 'menu_order' : $instance['sortby'];
 		$exclude = empty( $instance['exclude'] ) ? '' : $instance['exclude'];
+		$parent_id = empty( $instance['parent'] ) ? -1 : $instance['parent'];
+		$depth = empty( $instance['depth'] ) ? 0 : $instance['depth'];
+		
+		if ( $parent_id == -1 ) $parent_id = get_the_ID();
 
 		if ( $sortby == 'menu_order' )
 			$sortby = 'menu_order, post_title';
 		
 		$out = wp_list_pages( apply_filters( 'widget_pages_args', array(
 			'title_li'    => '',
-			'child_of'    => get_the_ID(),
+			'child_of'    => $parent_id,
 			'echo'        => 0,
+			'depth'       => $depth,
 			'sort_column' => $sortby,
 			'exclude'     => $exclude
 		) ) );
@@ -65,6 +70,8 @@ class ccchildpages_widget extends WP_Widget {
 		}
 		
 		$exclude = ( isset( $instance['exclude'] ) ? $instance['exclude'] : '' );
+		$parent_id = ( isset( $instance['parent'] ) ? intval($instance['parent']) : -1 );
+		$depth = ( isset( $instance['depth'] ) ? intval($instance['depth']) : 0 );
 		?>
 		<p>
 		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'cc-child-pages' ); ?></label> 
@@ -83,6 +90,27 @@ class ccchildpages_widget extends WP_Widget {
 			<br />
 			<small><?php _e( 'Page IDs, separated by commas.', 'cc-child-pages' ); ?></small>
 		</p>
+		<p>
+<?php
+$args = array(
+	'depth'					=> $depth,
+	'child_of'				=> 0,
+	'selected'				=> $parent_id,
+	'sort_column'			=> 'menu_order',
+	'echo'					=> 1,
+	'name'					=> $this->get_field_name('parent'),
+	'id'					=> $this->get_field_name('parent'), // string
+	'show_option_none'		=> 'Current Page', // string
+	'show_option_no_change'	=> null, // string
+	'option_none_value'		=> -1, // string
+);?>
+			<label for="<?php echo $this->get_field_id('parent'); ?>"><?php _e( 'Parent:', 'cc-child-pages' ); ?></label> <?php wp_dropdown_pages( $args ); ?>
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('depth'); ?>"><?php _e( 'Depth:', 'cc-child-pages' ); ?></label> <input type="text" value="<?php echo $depth; ?>" name="<?php echo $this->get_field_name('depth'); ?>" id="<?php echo $this->get_field_id('depth'); ?>" class="widefat" />
+			<br />
+			<small><?php _e( '<ul><li>0 - Pages and sub-pages displayed in hierarchical (indented) form (Default).</li><li>-1 - Pages in sub-pages displayed in flat (no indent) form.</li><li>1 - Show only top level Pages</li><li>2 - Value of 2 (or greater) specifies the depth (or level) to descend in displaying Pages.</li></ul>', 'cc-child-pages' ); ?></small>
+		</p>
 		<?php 
 	}
 
@@ -96,6 +124,8 @@ class ccchildpages_widget extends WP_Widget {
 		// processes widget options to be saved
 		$instance = array();
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+		$instance['parent'] = ( ! empty( $new_instance['parent'] ) ) ? strip_tags( $new_instance['parent'] ) : -1;
+		$instance['depth'] = ( ! empty( $new_instance['depth'] ) ) ? strip_tags( $new_instance['depth'] ) : 0;
 
 		if ( in_array( $new_instance['sortby'], array( 'post_title', 'menu_order', 'ID' ) ) ) {
 			$instance['sortby'] = $new_instance['sortby'];
