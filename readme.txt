@@ -135,6 +135,9 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 
 == Upgrade Notice ==
 
+= 1.8 =
+CC Child Pages widget enhanced to allow display of children of current page or a specific page. Depth can also be specified.
+
 = 1.7 =
 Added new CC Child Pages Widget. Added lots of new classes to help with custom CSS styling.
 
