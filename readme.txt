@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0
-Stable tag: 1.8
-Version: 1.8
+Stable tag: 1.9
+Version: 1.9
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -23,9 +23,13 @@ You can choose between 1, 2, 3 & 4 column layouts.
 
 3 & 4 column layouts will resize to a 2 column layout on small devices to ensure that they remain readable.
 
+= CC Child Pages editor button =
+
+**CC Child Pages now adds a button to the WordPress text editor, allowing you to quickly insert the shortcode and select many common options**
+
 = CC Child Pages widget =
 
-**CC Child Pages now also includes a widget for displaying child pages within your sidebars.**
+CC Child Pages also includes a widget for displaying child pages within your sidebars.
 
 The widget can be set to show the children of the current page or a specific page.
 
@@ -65,6 +69,10 @@ You can display a thumbnail of the featured image for each page (if set) by sett
 
 `[child_pages thumbs="true"]`
 
+You can now also display thumbnails at different sizes to the default ('medium') size. Simply specify the thumbnail size in the `thumbs` parameter. You can even specify custom image sizes.
+
+`[child_pages thumbs='large']`
+
 You can limit the length of the excerpt by specifying the `words` parameter:
 
 `[child_pages words="10"]`
@@ -101,6 +109,12 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 
 == Changelog ==
 
+= 1.9 =
+* Added editor button
+* Added custom excerpt capability to pages by default
+* Refined generation of page excerpt where no custom excerpt exists
+* Enhanced functionality of the `thumbs` option - you can now set this to the desired thumbnail size e.g. `thumbs="large"`, `thumbs="full"`, `thumbs="my-custom-size"`, etc.
+
 = 1.8 =
 * CC Child Pages widget enhanced to allow display of children of current page or a specific page
 * CC Child Pages widget enhanced to allow depth to be specified
@@ -134,6 +148,9 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.9 =
+Added editor button, added custom excerpt capability to pages, enhanced thumbnail options and refined excerpt generation from page content
 
 = 1.8 =
 CC Child Pages widget enhanced to allow display of children of current page or a specific page. Depth can also be specified.

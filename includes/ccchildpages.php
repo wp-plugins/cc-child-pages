@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.8';
+	const plugin_version = '1.9';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -71,10 +71,18 @@ class ccchildpages {
 		}
 		
 		if ( strtolower(trim($a['thumbs'])) == 'true' ) {
-			$thumbs = TRUE;
+			$thumbs = 'medium';
+		}
+		else if ( strtolower(trim($a['thumbs'])) == 'false' ) {
+			$thumbs = FALSE;
 		}
 		else {
-			$thumbs = FALSE;
+			$thumbs = strtolower(trim($a['thumbs']));
+			
+			$img_sizes = get_intermediate_image_sizes();
+			$img_sizes[] = 'full'; // allow "virtual" image size ...
+			
+			if ( ! in_array( $thumbs, $img_sizes ) ) $thumbs = 'medium';
 		}
 		
 		$more = htmlentities(trim($a['more']));
@@ -151,10 +159,10 @@ class ccchildpages {
 			
 				$page_count++;
 			
-				if ( $page_count%$cols == 0 ) {
+				if ( $page_count%$cols == 0 && $cols > 1) {
 					$page_class = ' cclast';
 				}
-				else if ( $page_count%$cols == 1 ) {
+				else if ( $page_count%$cols == 1 && $cols > 1 ) {
 					$page_class = ' ccfirst';
 				}
 				else {
@@ -178,26 +186,26 @@ class ccchildpages {
 			
 				$return_html .= '<h3>' . htmlentities(get_the_title()) . '</h3>';
 				
-				if ( $thumbs ) {
+				if ( $thumbs != FALSE ) {
 					$thumb_attr = array(
 						'class'	=> "cc-child-pages-thumb",
 						'alt'	=> get_the_title(),
 						'title'	=> get_the_title(),
 					);
 					
-					$return_html .= get_the_post_thumbnail($id, 'medium', $thumb_attr);
+					$return_html .= get_the_post_thumbnail($id, $thumbs, $thumb_attr);
 				}
 
 				if ( has_excerpt() ) {
 					$page_excerpt = get_the_excerpt();
 				}
 				else {
-					$page_excerpt = strip_tags( wp_trim_excerpt(), '<p><strong><em><b><i>' );
+					$page_excerpt = strip_tags( get_the_content(), '<p><strong><em><b><i>' );
 				}
 				
 				$words = ( intval($a['words']) > 0 ? intval($a['words']) : 55 );
 				
-				$page_excerpt = wp_trim_words( $page_excerpt, $words );
+				$page_excerpt = wp_trim_words( $page_excerpt, $words, '...' );
 			
 				$return_html .= '<p class="ccpages_excerpt">' . $page_excerpt . '</p>';
 			
@@ -228,11 +236,60 @@ class ccchildpages {
 		}
 	}
 
-	function the_slug($id) {
+	private static function the_slug($id) {
 		$post_data = get_post($id, ARRAY_A);
 		$slug = $post_data['post_name'];
 		return $slug; 
 	}
+	
+	public static function dashboard_widgets() {
+		if ( current_user_can( 'update_plugins' ) ) {
+			wp_add_dashboard_widget('cc-child-pages-dashboard', 'CC Child Pages', 'ccchildpages::dashboard_widget_feed');
+		}
+	}
+	
+	public static function dashboard_widget_feed() {
+		$content = file_get_contents('http://ccplugins.co.uk/feed/');
+		$x = new SimpleXmlElement($content);
+     
+		echo '<ul>';
+     
+		foreach($x->channel->item as $entry) {
+			echo '<li><a href="' . $entry->link . '" title="' . $entry->title . '" target="_blank">' . $entry->title . '</a></li>';
+		}
+		echo '</ul>';
+	}
+	
+	public static function tinymce_buttons() {
+		add_filter( 'mce_external_plugins', 'ccchildpages::add_childpages_buttons' );
+		add_filter( 'mce_buttons', 'ccchildpages::register_childpages_buttons' );
+	}
+	
+	public static function add_childpages_buttons ( $plugin_array ) {
+		$plugin_array['ccchildpages'] = plugins_url( 'js/ccchildpages-plugin.js' , __FILE__ );
+		return $plugin_array;
+	}
+	
+	public static function register_childpages_buttons ( $buttons ) {
+		array_push( $buttons, 'ccchildpages');
+		return $buttons;
+	}
+	
+	/*
+	 * Show Excerpt for Pages ...
+	 */
+	public static function show_page_excerpt () {
+		add_post_type_support( 'page', 'excerpt' );
+	}
+	
+	/*
+	 * Show plugin links
+	 */
+	function plugin_action_links( $links ) {
+		$links[] = '<a href="https://wordpress.org/support/view/plugin-reviews/cc-child-pages" target="_blank">Rate this plugin...</a>';
+//		$links[] = '<a href="http://www.ccplugins.co.uk" target="_blank">More from CC Plugins</a>';
+		return $links;
+}
 }
 
 /*EOF*/
