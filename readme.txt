@@ -6,7 +6,7 @@ Plugin URI: http://ccchildpages.ccplugins.co.uk/
 Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
-Tested up to: 4.0
+Tested up to: 4.0.1
 Stable tag: 1.9
 Version: 1.9
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
