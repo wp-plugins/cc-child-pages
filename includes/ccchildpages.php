@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.10';
+	const plugin_version = '1.11';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -108,10 +108,6 @@ class ccchildpages {
 				'exclude'		=> $a['exclude'],
 				'sort_column'	=> 'menu_order'
 			);
-
-			$parent = new WP_Query( $args );
-		
-			if ( ! $parent->have_posts() ) return '';
 		
 			$page_count = 0;		
 

@@ -1,4 +1,4 @@
-﻿=== CC Child Pages ===
+=== CC Child Pages ===
 
 Plugin Name: CC Child Pages
 Contributors: caterhamcomputing
@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0.1
-Stable tag: 1.10
-Version: 1.10
+Stable tag: 1.11
+Version: 1.11
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -168,6 +168,9 @@ The `depth` parameter accepts the following values:
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.11 =
+Bug fix: Corrected small bug introduced in version 1.10 when using `list="true"`
 
 = 1.10 =
 Added exclude parameter for shortcode, and depth parameter for shortcode when list output is selected.
