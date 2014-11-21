@@ -1,4 +1,4 @@
-=== CC Child Pages ===
+﻿=== CC Child Pages ===
 
 Plugin Name: CC Child Pages
 Contributors: caterhamcomputing
@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0.1
-Stable tag: 1.9
-Version: 1.9
+Stable tag: 1.10
+Version: 1.10
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -61,6 +61,10 @@ You can also show the child pages of a specific page by adding the `ID` of the p
 
 `[child_pages id="42"]`
 
+To exclude pages, use the `exclude` parameter. This allows you to specify a comma separated list of Page IDs to be exclude from the output of the shortcode.
+
+`[child_pages exclude="5,33,45"]`
+
 If you want to prefer to use text other than the standard "Read more ..." to link to the pages, this can be specified with the `more` parameter:
 
 `[child_pages more="More..."]`
@@ -88,9 +92,21 @@ If you want to style the child page boxes yourself, you can also specify the `cl
 
 `[child_pages class="myclass"]`
 
-Finally, you can also display just an unordered list (`<ul>`) of child pages by adding the `list` parameter. In this case, all other parameters are ignored **except for `class` and `id`**.
+Finally, you can also display just an unordered list (`<ul>`) of child pages by adding the `list` parameter. In this case, all other parameters are ignored **except for `class`, `exclude` and `id`**.
 
 `[child_pages list="true"]`
+
+When using the `list` parameter, you can also specify the `depth` parameter to specify how many levels in the hierarchy of pages are to be included in the list.
+
+The `depth` parameter accepts the following values:
+
+* 0 (default) Displays pages at any depth and arranges them hierarchically in nested lists 
+* -1 Displays pages at any depth and arranges them in a single, flat list 
+* 1 Displays top-level Pages only 
+* 2, 3 … Displays Pages to the given depth
+
+`[child_pages list="true" depth="4"]`
+
 
 == Screenshots ==
 
@@ -108,6 +124,10 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 12. CC Child Pages widget options
 
 == Changelog ==
+
+= 1.10 =
+* Added `exclude` parameter
+* Added `depth` parameter (only used if `list` is set to `"true"`)
 
 = 1.9 =
 * Added editor button
@@ -148,6 +168,9 @@ Finally, you can also display just an unordered list (`<ul>`) of child pages by 
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.10 =
+Added exclude parameter for shortcode, and depth parameter for shortcode when list output is selected.
 
 = 1.9 =
 Added editor button, added custom excerpt capability to pages, enhanced thumbnail options and refined excerpt generation from page content

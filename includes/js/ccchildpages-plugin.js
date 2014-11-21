@@ -74,6 +74,11 @@
 									value: 'simple'
 								},
 								{
+									type: 'textbox',
+									name: 'ccchildexclude',
+									label: 'Exclude (comma separated list of page IDs)'
+								},
+								{
 									type: 'listbox',
 									name: 'ccchildlist',
 									label: 'Show as list',
@@ -82,6 +87,11 @@
 										{ text: 'True', value: 'true' },
 									],
 									value: 'false'
+								},
+								{
+									type: 'textbox',
+									name: 'ccchilddepth',
+									label: 'Depth (only for list mode)'
 								},
 							],
 							onsubmit: function(e) {
@@ -98,8 +108,12 @@
 									return_text = return_text + ' class="' + e.data.ccchildclass + '"';
 								if ( e.data.ccchildskin != '' )
 									return_text = return_text + ' skin="' + e.data.ccchildskin + '"';
+								if ( e.data.ccchildexclude != '' )
+									return_text = return_text + ' exclude="' + e.data.ccchildexclude + '"';
 								if ( e.data.ccchildlist != '' )
 									return_text = return_text + ' list="' + e.data.ccchildlist + '"';
+								if ( e.data.ccchilddepth != '' )
+									return_text = return_text + ' depth="' + e.data.ccchilddepth + '"';
 								
 								return_text = return_text + ']';
 								
@@ -140,7 +154,7 @@ longname : 'CC Child Pages',
 author : 'Tim Lomas',
 authorurl : 'http://caterhamcomputing.net',
 infourl : 'http://ccchildpages.ccplugins.co.uk',
-version : "1.9"
+version : "1.10"
 };
 				}
 			});

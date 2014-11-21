@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.9';
+	const plugin_version = '1.10';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -21,15 +21,20 @@ class ccchildpages {
 
 	public static function show_child_pages( $atts ) {
 		$a = shortcode_atts( array(
-			'id'	=> get_the_ID(),
-			'cols'	=> '3',
-			'skin'	=> 'simple',
-			'class'	=> '',
-			'list'	=> 'false',
-			'thumbs'	=> 'false',
-			'more'	=> __('Read more ...', 'cc-child-pages'),
+			'id'			=> get_the_ID(),
+			'cols'			=> '3',
+			'depth'			=> '1',
+			'exclude'		=> '',
+			'exclude_tree'	=> '',
+			'skin'			=> 'simple',
+			'class'			=> '',
+			'list'			=> 'false',
+			'thumbs'		=> 'false',
+			'more'			=> __('Read more ...', 'cc-child-pages'),
 			'words'	=> 55,
 		), $atts );
+		
+		$depth = intval($a['depth']);
 		
 		switch ( $a['cols'] ) {
 			case '4':
@@ -96,12 +101,12 @@ class ccchildpages {
 
 		if ( $list ) {	
 			$args = array(
-				'post_type'      => 'page',
-				'posts_per_page' => -1,
-				'post_parent'    => $page_id,
-				'order'          => 'ASC',
-				'orderby'        => 'menu_order',
-				'post_status' => 'publish'
+				'title_li'		=> '',
+				'child_of'		=> $page_id,
+				'echo'			=> 0,
+				'depth'			=> $depth,
+				'exclude'		=> $a['exclude'],
+				'sort_column'	=> 'menu_order'
 			);
 
 			$parent = new WP_Query( $args );
@@ -111,28 +116,13 @@ class ccchildpages {
 			$page_count = 0;		
 
 			$return_html .= '<ul>';
-
-			while ( $parent->have_posts() ) {
-			
-				$parent->the_post();
-			
-				$page_count++;
-			
-				if ( $page_count%$cols == 0 ) {
-					$page_class = ' cclast';
-				}
-				else if ( $page_count%$cols == 1 ) {
-					$page_class = ' ccfirst';
-				}
-				else {
-					$page_class = '';
-				}
-			
-				$link = get_permalink(get_the_ID());
 						
-				$return_html .= '<li><a href="' . $link . '" title="' . htmlentities(get_the_title()) . '">' . htmlentities(get_the_title()) . '</a></li>';
+			$page_list .= trim(wp_list_pages( $args ));
 			
-			}
+			if ( $page_list == '' ) return '';
+			
+			$return_html .= $page_list;
+			
 			$return_html .= '</ul>';
 		}
 		else {				
@@ -141,8 +131,9 @@ class ccchildpages {
 				'posts_per_page' => -1,
 				'post_parent'    => $page_id,
 				'order'          => 'ASC',
-				'orderby'        => 'menu_order',
-				'post_status' => 'publish'
+				'orderby'			=> 'menu_order',
+				'post__not_in'		=> explode(',', $a['exclude']),
+				'post_status'		=> 'publish'
 			);
 
 			$parent = new WP_Query( $args );
