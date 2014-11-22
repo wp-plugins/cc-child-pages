@@ -187,7 +187,7 @@ class ccchildpages {
 					$page_excerpt = get_the_excerpt();
 				}
 				else {
-					$page_excerpt = strip_tags( do_shortcode( get_the_content(), '<strong><em><b><i>' ) );
+					$page_excerpt = strip_tags( do_shortcode( get_the_content(), '<p><strong><em><b><i>' ) );
 				}
 				
 				$words = ( intval($a['words']) > 0 ? intval($a['words']) : 55 );
