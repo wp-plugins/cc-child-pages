@@ -87,17 +87,19 @@ To change the order in which the child pages are listed, you can use the `orderb
 `[child_pages orderby="title" order="ASC"]`
 
 The `orderby` parameter can have one of the following values:
-* `menu_order` (the default value) - shows the pages sorted by the order in which they appear within the WordPress admin
-* `id` - sorts the pages according to the ID of the page
-* `title` - sorts the pages alphabetically by the title
-* `slug` - sorts the pages alphabetically according to the slug (page_name) of the page
-* `author` - sorts the pages by author
-* `date` - sorts the pages by the date they were created
-* `modified` - sorts the pages by the date they were modified
+`menu_order` (the default value) - shows the pages sorted by the order in which they appear within the WordPress admin
+
+`id` - sorts the pages according to the ID of the page
+`title` - sorts the pages alphabetically by the title
+`slug` - sorts the pages alphabetically according to the slug (page_name) of the page
+`author` - sorts the pages by author
+`date` - sorts the pages by the date they were created
+`modified` - sorts the pages by the date they were modified
 
 The `order` parameter can be set to:
-* `ASC` - show the pages in ascending order, sorted by the value of `orderby`
-* `DESC` - show the pages in descending order, sorted by the value of `orderby`
+
+`ASC` - show the pages in ascending order, sorted by the value of `orderby`
+`DESC` - show the pages in descending order, sorted by the value of `orderby`
 
 You can now also use the `skin` parameter to choose a colour scheme for the Child Pages as follows:
 
