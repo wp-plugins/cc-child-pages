@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0.1
-Stable tag: 1.12
-Version: 1.12
+Stable tag: 1.13
+Version: 1.13
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -81,6 +81,24 @@ You can limit the length of the excerpt by specifying the `words` parameter:
 
 `[child_pages words="10"]`
 
+
+To change the order in which the child pages are listed, you can use the `orderby` and `order` parameters:
+
+`[child_pages orderby="title" order="ASC"]`
+
+The `orderby` parameter can have one of the following values:
+* `menu_order` (the default value) - shows the pages sorted by the order in which they appear within the WordPress admin
+* `id` - sorts the pages according to the ID of the page
+* `title` - sorts the pages alphabetically by the title
+* `slug` - sorts the pages alphabetically according to the slug (page_name) of the page
+* `author` - sorts the pages by author
+* `date` - sorts the pages by the date they were created
+* `modified` - sorts the pages by the date they were modified
+
+The `order` parameter can be set to:
+* `ASC` - show the pages in ascending order, sorted by the value of `orderby`
+* `DESC` - show the pages in descending order, sorted by the value of `orderby`
+
 You can now also use the `skin` parameter to choose a colour scheme for the Child Pages as follows:
 
 `[child_pages skin="simple"]` (the default colour scheme)
@@ -92,7 +110,7 @@ If you want to style the child page boxes yourself, you can also specify the `cl
 
 `[child_pages class="myclass"]`
 
-Finally, you can also display just an unordered list (`<ul>`) of child pages by adding the `list` parameter. In this case, all other parameters are ignored **except for `class`, `exclude` and `id`**.
+Finally, you can also display just an unordered list (`<ul>`) of child pages by adding the `list` parameter. In this case, all other parameters are ignored **except for `class`, `exclude`, `orderby`, `order` and `id`**.
 
 `[child_pages list="true"]`
 
@@ -106,6 +124,7 @@ The `depth` parameter accepts the following values:
 * 2, 3 … Displays Pages to the given depth
 
 `[child_pages list="true" depth="4"]`
+
 
 
 == Screenshots ==
@@ -124,6 +143,10 @@ The `depth` parameter accepts the following values:
 12. CC Child Pages widget options
 
 == Changelog ==
+
+= 1.13 =
+* Bug fix: Corrected problem with titles including special characters
+* Added orderby and order parameters to control the display order of child pages
 
 = 1.12 =
 * Bug fix: Corrected problem when automatic excerpt returns value including a shortcode
@@ -174,6 +197,10 @@ The `depth` parameter accepts the following values:
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.13 =
+Bug fix: Corrected problem with titles including special characters
+Added orderby and order parameters to control the display order of child pages
 
 = 1.12 =
 Bug fix: Corrected problem when automatic excerpt returns value including a shortcode

@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.12';
+	const plugin_version = '1.13';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -28,6 +28,8 @@ class ccchildpages {
 			'exclude_tree'	=> '',
 			'skin'			=> 'simple',
 			'class'			=> '',
+			'orderby'		=> 'menu_order',
+			'order'			=> 'ASC',
 			'list'			=> 'false',
 			'thumbs'		=> 'false',
 			'more'			=> __('Read more ...', 'cc-child-pages'),
@@ -75,6 +77,70 @@ class ccchildpages {
 			$list = FALSE;
 		}
 		
+		if ( $a['order'] == 'ASC' ) {
+			$order = 'ASC';
+		}
+		else {
+			$order = 'DESC';
+		}
+
+		switch ( $a['orderby'] ) {
+			case 'post_id':
+			case 'id':
+			case 'ID':
+				$orderby = 'ID';
+				break;
+			case 'post_author':
+			case 'author':
+				if ( $list ) {
+					$orderby = 'post_author';
+				}
+				else {
+					$orderby = 'author';
+				}
+				break;
+			case 'post_date':
+			case 'date':
+				if ( $list ) {
+					$orderby = 'post_date';
+				}
+				else {
+					$orderby = 'date';
+				}
+				break;
+			case 'post_modified':
+			case 'modified':
+				if ( $list ) {
+					$orderby = 'post_modified';
+				}
+				else {
+					$orderby = 'modified';
+				}
+				break;
+			case 'post_title':
+			case 'title':
+				if ( $list ) {
+					$orderby = 'post_title';
+				}
+				else {
+					$orderby = 'title';
+				}
+				break;
+			case 'post_name':
+			case 'name':
+			case 'slug':
+				if ( $list ) {
+					$orderby = 'post_name';
+				}
+				else {
+					$orderby = 'name';
+				}
+				break;
+			default:
+				$orderby = 'menu_order';
+		}
+
+		
 		if ( strtolower(trim($a['thumbs'])) == 'true' ) {
 			$thumbs = 'medium';
 		}
@@ -106,14 +172,15 @@ class ccchildpages {
 				'echo'			=> 0,
 				'depth'			=> $depth,
 				'exclude'		=> $a['exclude'],
-				'sort_column'	=> 'menu_order'
+				'sort_order'	=> $order,
+				'sort_column'	=> $orderby
 			);
 		
 			$page_count = 0;		
 
 			$return_html .= '<ul>';
 						
-			$page_list .= trim(wp_list_pages( $args ));
+			$page_list = trim(wp_list_pages( $args ));
 			
 			if ( $page_list == '' ) return '';
 			
@@ -126,8 +193,8 @@ class ccchildpages {
 				'post_type'      => 'page',
 				'posts_per_page' => -1,
 				'post_parent'    => $page_id,
-				'order'          => 'ASC',
-				'orderby'			=> 'menu_order',
+				'order'          => $order,
+				'orderby'			=> $orderby,
 				'post__not_in'		=> explode(',', $a['exclude']),
 				'post_status'		=> 'publish'
 			);
@@ -171,7 +238,7 @@ class ccchildpages {
 			
 				$return_html .= '<div class="ccchildpage' . $page_class . '">';
 			
-				$return_html .= '<h3>' . htmlentities(get_the_title()) . '</h3>';
+				$return_html .= '<h3>' . get_the_title() . '</h3>';
 				
 				if ( $thumbs != FALSE ) {
 					$thumb_attr = array(
