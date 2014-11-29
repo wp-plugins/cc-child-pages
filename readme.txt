@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0.1
-Stable tag: 1.13
-Version: 1.13
+Stable tag: 1.14
+Version: 1.14
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -146,6 +146,10 @@ The `depth` parameter accepts the following values:
 
 == Changelog ==
 
+= 1.14 =
+* Bug fix: Corrected missing `<ul>` tags in widget
+* Minor CSS changes to improve compatibility with certain themes
+
 = 1.13 =
 * Bug fix: Corrected problem with titles including special characters
 * Added orderby and order parameters to control the display order of child pages
@@ -199,6 +203,10 @@ The `depth` parameter accepts the following values:
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.14 =
+* Bug fix: Corrected missing `<ul>` tags in widget
+* Minor CSS changes to improve compatibility with certain themes
 
 = 1.13 =
 Bug fix: Corrected problem with titles including special characters
