@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.14';
+	const plugin_version = '1.15';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -30,6 +30,9 @@ class ccchildpages {
 			'class'			=> '',
 			'orderby'		=> 'menu_order',
 			'order'			=> 'ASC',
+			'link_titles'	=> 'false',
+			'title_link_class' => 'ccpage_title_link',
+			'hide_more'		=> 'false',
 			'list'			=> 'false',
 			'thumbs'		=> 'false',
 			'more'			=> __('Read more ...', 'cc-child-pages'),
@@ -75,6 +78,21 @@ class ccchildpages {
 		}
 		else {
 			$list = FALSE;
+		}
+		
+		if ( strtolower(trim($a['link_titles'])) == 'true' ) {
+			$link_titles = TRUE;
+			$title_link_class = trim($a['title_link_class']);
+		}
+		else {
+			$link_titles = FALSE;
+		}
+		
+		if ( strtolower(trim($a['hide_more'])) == 'true' ) {
+			$hide_more = TRUE;
+		}
+		else {
+			$hide_more = FALSE;
 		}
 		
 		if ( $a['order'] == 'ASC' ) {
@@ -238,7 +256,12 @@ class ccchildpages {
 			
 				$return_html .= '<div class="ccchildpage' . $page_class . '">';
 			
-				$return_html .= '<h3>' . get_the_title() . '</h3>';
+				if ( ! $link_titles ) {
+					$return_html .= '<h3>' . get_the_title() . '</h3>';
+				}
+				else {
+					$return_html .= '<h3 class="ccpage_linked_title"><a class="' . $title_link_class . '" href="' . $link . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
+				}
 				
 				if ( $thumbs != FALSE ) {
 					$thumb_attr = array(
@@ -263,7 +286,7 @@ class ccchildpages {
 			
 				$return_html .= '<p class="ccpages_excerpt">' . $page_excerpt . '</p>';
 			
-				$return_html .= '<p class="ccpages_more"><a href="' . $link . '" title="' . $more . '">' . $more . '</a></p>';
+				if ( ! $hide_more ) $return_html .= '<p class="ccpages_more"><a href="' . $link . '" title="' . $more . '">' . $more . '</a></p>';
 			
 				$return_html .= '</div>';
 			}

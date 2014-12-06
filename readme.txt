@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0.1
-Stable tag: 1.14
-Version: 1.14
+Stable tag: 1.15
+Version: 1.15
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -68,6 +68,20 @@ To exclude pages, use the `exclude` parameter. This allows you to specify a comm
 If you want to prefer to use text other than the standard "Read more ..." to link to the pages, this can be specified with the `more` parameter:
 
 `[child_pages more="More..."]`
+
+You may also hide the "Read more ..." link altogether by setting the `hide_more` parameter to `"true"`:
+
+`[child_pages hide_more="true"]`
+
+Since there is no other way for the visitor to link to the child page, you can choose to make the page titles link to the child page by setting the `link_titles` parameter to `"true"`:
+
+`[child_pages link_titles="true"]`
+
+(This is mainly designed to be used with the `hide_more` parameter, but can be used independently if you want to have both the titles and "Read more ..." text link to the child page.)
+
+When specifying `link_titles="true"`, you may wish to apply your own styling to the links. To do so, you can specify a style using the `title_link_class` parameter:
+
+`[child_pages link_titles="true" title_link_class="my_title_link_class"]`
 
 You can display a thumbnail of the featured image for each page (if set) by setting the `thumbs` to `"true"`:
 
@@ -146,6 +160,11 @@ The `depth` parameter accepts the following values:
 
 == Changelog ==
 
+= 1.15 =
+* Added `hide_more` parameter to hide "Read more ..." links.
+* Added `link_titles` parameter to make titles link to pages.
+* Added `title_link_class` parameter for styling links in page titles.
+
 = 1.14 =
 * Bug fix: Corrected missing `<ul>` tags in widget
 * Minor CSS changes to improve compatibility with certain themes
@@ -203,6 +222,11 @@ The `depth` parameter accepts the following values:
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.15 =
+* Added `hide_more` parameter to hide "Read more ..." links.
+* Added `link_titles` parameter to make titles link to pages.
+* Added `title_link_class` parameter for styling links in page titles.
 
 = 1.14 =
 * Bug fix: Corrected missing `<ul>` tags in widget
