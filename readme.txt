@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0.1
-Stable tag: 1.15
-Version: 1.15
+Stable tag: 1.16
+Version: 1.16
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -95,6 +95,9 @@ You can limit the length of the excerpt by specifying the `words` parameter:
 
 `[child_pages words="10"]`
 
+You can hide the excerpt altogether by setting the `hide_excerpt` parameter to `"true"`:
+
+`[child_pages hide_excerpt="true"]`
 
 To change the order in which the child pages are listed, you can use the `orderby` and `order` parameters:
 
@@ -160,6 +163,9 @@ The `depth` parameter accepts the following values:
 
 == Changelog ==
 
+= 1.16 =
+* Added the `hide_excerpt` parameter
+
 = 1.15 =
 * Added `hide_more` parameter to hide "Read more ..." links.
 * Added `link_titles` parameter to make titles link to pages.
@@ -222,6 +228,9 @@ The `depth` parameter accepts the following values:
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.16 =
+* Added the `hide_excerpt` parameter
 
 = 1.15 =
 * Added `hide_more` parameter to hide "Read more ..." links.
