@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.16';
+	const plugin_version = '1.17';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -286,12 +286,12 @@ class ccchildpages {
 						$page_excerpt = get_the_excerpt();
 					}
 					else {
-						$page_excerpt = strip_tags( do_shortcode( get_the_content(), '<p><strong><em><b><i>' ) );
+						$page_excerpt = strip_tags( do_shortcode( get_the_content() ) );
 					}
 				
 					$words = ( intval($a['words']) > 0 ? intval($a['words']) : 55 );
 				
-					$page_excerpt = wp_trim_words( $page_excerpt, $words, '...' );
+					if ( str_word_count(strip_tags($page_excerpt)) > $words ) $page_excerpt = wp_trim_words( $page_excerpt, $words, '...' );
 			
 					$return_html .= '<p class="ccpages_excerpt">' . $page_excerpt . '</p>';
 				}
