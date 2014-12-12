@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.0.1
-Stable tag: 1.17
-Version: 1.17
+Stable tag: 1.18
+Version: 1.18
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -99,6 +99,14 @@ You can hide the excerpt altogether by setting the `hide_excerpt` parameter to `
 
 `[child_pages hide_excerpt="true"]`
 
+You can stop Custom Excerpts from being truncated by seting the `truncate_excerpt` parameter to "false":
+
+`[child_pages truncate_excerpt="false"]`
+
+... this will display custom excerpts exactly as entered without being shortened. (Especially useful if using the Rich Text Excerpts plugin, in which case all styling will be preserved.)
+
+When `truncate_excerpt` is set to `true`, excerpts will be truncated only if they exceed the specified word count (default 55). When custom excerpts are truncated, any HTML will be removed.
+
 To change the order in which the child pages are listed, you can use the `orderby` and `order` parameters:
 
 `[child_pages orderby="title" order="ASC"]`
@@ -162,6 +170,10 @@ The `depth` parameter accepts the following values:
 12. CC Child Pages widget options
 
 == Changelog ==
+
+= 1.18 =
+* Added settings page to allow disabing of button in Visual Editor (TinyMCE)
+* Added the `truncate_excerpt` parameter to the shortcode, defaults to `true` but setting to `false` stops custom excerpts from being shortened (where no custom excerpt exists, page content will still be truncated)
 
 = 1.17 =
 * Small change to how custom excerpts are handled for interoperability with Rich Text Excerpts plugin. 
@@ -231,6 +243,10 @@ The `depth` parameter accepts the following values:
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.18 =
+* Added settings page to allow disabing of button in Visual Editor (TinyMCE)
+* Added the `truncate_excerpt` parameter to the shortcode, defaults to `true` but setting to `false` stops custom excerpts from being shortened (where no custom excerpt exists, page content will still be truncated)
 
 = 1.17 =
 * Small change to how custom excerpts are handled for interoperability with Rich Text Excerpts plugin. 

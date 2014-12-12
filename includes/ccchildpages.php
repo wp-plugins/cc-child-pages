@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.17';
+	const plugin_version = '1.18';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -34,6 +34,7 @@ class ccchildpages {
 			'title_link_class' => 'ccpage_title_link',
 			'hide_more'		=> 'false',
 			'hide_excerpt'	=> 'false',
+			'truncate_excerpt'	=> 'true',
 			'list'			=> 'false',
 			'thumbs'		=> 'false',
 			'more'			=> __('Read more ...', 'cc-child-pages'),
@@ -79,6 +80,13 @@ class ccchildpages {
 		}
 		else {
 			$list = FALSE;
+		}
+		
+		if ( strtolower(trim($a['truncate_excerpt'])) == 'true' ) {
+			$truncate_excerpt = TRUE;
+		}
+		else {
+			$truncate_excerpt = FALSE;
 		}
 		
 		if ( strtolower(trim($a['link_titles'])) == 'true' ) {
@@ -282,17 +290,17 @@ class ccchildpages {
 				}
 
 				if ( ! $hide_excerpt ) {
+					$words = ( intval($a['words']) > 0 ? intval($a['words']) : 55 );
+				
 					if ( has_excerpt() ) {
 						$page_excerpt = get_the_excerpt();
+						if ( str_word_count(strip_tags($page_excerpt) ) > $words && $truncate_excerpt ) $page_excerpt = wp_trim_words( $page_excerpt, $words, '...' );
 					}
 					else {
 						$page_excerpt = strip_tags( do_shortcode( get_the_content() ) );
+						if ( str_word_count(strip_tags($page_excerpt)) > $words ) $page_excerpt = wp_trim_words( $page_excerpt, $words, '...' );
 					}
 				
-					$words = ( intval($a['words']) > 0 ? intval($a['words']) : 55 );
-				
-					if ( str_word_count(strip_tags($page_excerpt)) > $words ) $page_excerpt = wp_trim_words( $page_excerpt, $words, '...' );
-			
 					$return_html .= '<p class="ccpages_excerpt">' . $page_excerpt . '</p>';
 				}
 			
@@ -348,8 +356,26 @@ class ccchildpages {
 	}
 	
 	public static function tinymce_buttons() {
-		add_filter( 'mce_external_plugins', 'ccchildpages::add_childpages_buttons' );
-		add_filter( 'mce_buttons', 'ccchildpages::register_childpages_buttons' );
+		if ( $options = get_option('cc_child_pages') ) {
+			if ( empty( $options['show_button'] ) ) {
+				// undefined - so set to true for backward compatibility
+				$show_button = TRUE;
+			}
+			else if ( $options['show_button'] == 'true' ) {
+				$show_button = TRUE;
+			}
+			else {
+				$show_button = FALSE;
+			}
+		}
+		else {
+			$show_button = TRUE;
+		}
+		
+		if ( $show_button ) {
+			add_filter( 'mce_external_plugins', 'ccchildpages::add_childpages_buttons' );
+			add_filter( 'mce_buttons', 'ccchildpages::register_childpages_buttons' );
+		}
 	}
 	
 	public static function add_childpages_buttons ( $plugin_array ) {
@@ -360,6 +386,59 @@ class ccchildpages {
 	public static function register_childpages_buttons ( $buttons ) {
 		array_push( $buttons, 'ccchildpages');
 		return $buttons;
+	}
+	
+	/*
+	 * Add options page ...
+	 */
+	
+	// Set default values on activation ...
+	public static function options_activation () {
+		$options = array();
+		$options['show_button'] = 'true';
+		
+		add_option('cc_child_pages', $options, '', 'yes');
+	}
+	 
+	// Register settings ...
+	public static function register_options () {
+		register_setting('cc_child_pages', 'cc_child_pages');
+	}
+	
+	// Add submenu
+	public static function options_menu () {
+		add_options_page('CC Child Pages', 'CC Child Pages', 'manage_options', 'cc-child-pages', 'ccchildpages::options_page');
+	}
+	
+	// Display options page
+	public static function options_page () {
+?>
+<div class="wrap">
+	<form method="post" id="cc_child_page_form" action="options.php">
+		<?php
+			$show_button = FALSE;
+
+			settings_fields('cc_child_pages');
+			
+			if ( $options = get_option('cc_child_pages') ) {
+				if ( empty( $options['show_button'] ) ) {
+					// undefined - so set to true for backward compatibility
+					$show_button = TRUE;
+				}
+				else if ( $options['show_button'] == 'true' ) {
+					$show_button = TRUE;
+				}
+			}
+			else {
+				$show_button = TRUE;
+			}
+		?>
+		<h2><?php _e('CC Child Pages options', 'cc-child-pages' ) ?></h2>
+		<p><label>Add button to the visual editor: <input type="radio" name="cc_child_pages[show_button]" value="true" <?php checked(TRUE,$show_button) ?> > Yes <input type="radio" name="cc_child_pages[show_button]" value="false" <?php checked(FALSE,$show_button) ?> > No</label></p>
+		<p class="submit"><input  type="submit" name="submit" class="button-primary" value="Update Options" /></p>
+	</form>
+</div>
+<?php
 	}
 	
 	/*
