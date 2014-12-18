@@ -111,7 +111,14 @@ $args = array(
 		<p>
 			<label for="<?php echo $this->get_field_id('depth'); ?>"><?php _e( 'Depth:', 'cc-child-pages' ); ?></label> <input type="text" value="<?php echo $depth; ?>" name="<?php echo $this->get_field_name('depth'); ?>" id="<?php echo $this->get_field_id('depth'); ?>" class="widefat" />
 			<br />
-			<small><?php _e( '<ul><li>0 - Pages and sub-pages displayed in hierarchical (indented) form (Default).</li><li>-1 - Pages in sub-pages displayed in flat (no indent) form.</li><li>1 - Show only top level Pages</li><li>2 - Value of 2 (or greater) specifies the depth (or level) to descend in displaying Pages.</li></ul>', 'cc-child-pages' ); ?></small>
+			<small>
+				<ul>
+					<li>0 - <?php _e( 'Pages and sub-pages displayed in hierarchical (indented) form (Default).', 'cc-child-pages'); ?></li>
+					<li>-1 - <?php _e( 'Pages in sub-pages displayed in flat (no indent) form.', 'cc-child-pages' ); ?></li>
+					<li>1 - <?php _e( 'Show only top level Pages', 'cc-child-pages' ); ?></li>
+					<li>2 - <?php _e( 'Value of 2 (or greater) specifies the depth (or level) to descend in displaying Pages.', 'cc-child-pages'); ?></li>
+				</ul>
+			</small>
 		</p>
 		<?php 
 	}

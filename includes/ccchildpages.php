@@ -13,13 +13,16 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.18';
+	const plugin_version = '1.19';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
 
 	public static function show_child_pages( $atts ) {
+/*		// Include global DB object for video_thumbs option
+		global $wpdb; */
+
 		$a = shortcode_atts( array(
 			'id'			=> get_the_ID(),
 			'cols'			=> '3',
@@ -36,6 +39,7 @@ class ccchildpages {
 			'hide_excerpt'	=> 'false',
 			'truncate_excerpt'	=> 'true',
 			'list'			=> 'false',
+			'link_thumbs'	=> 'false',
 			'thumbs'		=> 'false',
 			'more'			=> __('Read more ...', 'cc-child-pages'),
 			'words'	=> 55,
@@ -175,6 +179,13 @@ class ccchildpages {
 		}
 
 		
+		if ( strtolower(trim($a['link_thumbs'])) == 'true' ) {
+			$link_thumbs = TRUE;
+		}
+		else {
+			$link_thumbs = FALSE;
+		}
+		
 		if ( strtolower(trim($a['thumbs'])) == 'true' ) {
 			$thumbs = 'medium';
 		}
@@ -286,8 +297,20 @@ class ccchildpages {
 						'title'	=> get_the_title(),
 					);
 					
+					// Check whether Video Thumbnail plugin is installed.
+					// If so, make sure that thumnail is generated.
+					if ( class_exists('Video_Thumbnails') && function_exists( 'get_video_thumbnail' ) ) {
+						// Call get_video_thumbnail to generate video thumbnail
+						$video_img = get_video_thumbnail($id);
+					}
+					
+					if ( $link_thumbs ) $return_html .= '<a class="ccpage_linked_thumb" href="' . $link . '" title="' . get_the_title() . '">';
+
 					$return_html .= get_the_post_thumbnail($id, $thumbs, $thumb_attr);
+					
+					if ( $link_thumbs ) $return_html .= '</a>';
 				}
+
 
 				if ( ! $hide_excerpt ) {
 					$words = ( intval($a['words']) > 0 ? intval($a['words']) : 55 );
