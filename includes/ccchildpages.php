@@ -13,15 +13,13 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.19';
+	const plugin_version = '1.20';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
 
 	public static function show_child_pages( $atts ) {
-/*		// Include global DB object for video_thumbs option
-		global $wpdb; */
 
 		$a = shortcode_atts( array(
 			'id'			=> get_the_ID(),
@@ -201,10 +199,10 @@ class ccchildpages {
 			if ( ! in_array( $thumbs, $img_sizes ) ) $thumbs = 'medium';
 		}
 		
-		$more = htmlentities(trim($a['more']));
+		$more = esc_html(trim($a['more']));
 		
 		// if class is specified, substitue value for skin class
-		if ( $a['class'] != '' ) $skin = trim(htmlentities($a['class']));
+		if ( $a['class'] != '' ) $skin = trim(esc_html($a['class']));
 		
 		$return_html = '<div class="ccchildpages ' . $class .' ' . $skin . ' ccclearfix">';
 
@@ -297,18 +295,33 @@ class ccchildpages {
 						'title'	=> get_the_title(),
 					);
 					
-					// Check whether Video Thumbnail plugin is installed.
-					// If so, make sure that thumnail is generated.
-					if ( class_exists('Video_Thumbnails') && function_exists( 'get_video_thumbnail' ) ) {
-						// Call get_video_thumbnail to generate video thumbnail
-						$video_img = get_video_thumbnail($id);
+					// Get the thumbnail code ...
+					$thumbnail = get_the_post_thumbnail($id, $thumbs, $thumb_attr);
+					
+					// If no thumbnail found, request a "Video Thumbnail" (if plugin installed)
+					// to try and force generation of thumbnail
+					if ( $thumbnail == '' ) {
+						// Check whether Video Thumbnail plugin is installed.
+						// If so, call get_video_thumbnail() to make sure that thumnail is generated.
+						if ( class_exists('Video_Thumbnails') && function_exists( 'get_video_thumbnail' ) ) {
+							// Call get_video_thumbnail to generate video thumbnail
+							$video_img = get_video_thumbnail($id);
+						}
+						
+						// Try getting post thumbnail again
+						$thumbnail = get_the_post_thumbnail($id, $thumbs, $thumb_attr);
 					}
 					
-					if ( $link_thumbs ) $return_html .= '<a class="ccpage_linked_thumb" href="' . $link . '" title="' . get_the_title() . '">';
-
-					$return_html .= get_the_post_thumbnail($id, $thumbs, $thumb_attr);
+					// If thumbnail is found, display it.
 					
-					if ( $link_thumbs ) $return_html .= '</a>';
+					if ( $thumbnail != '' ) {
+						if ( $link_thumbs ) {
+							$return_html .= '<a class="ccpage_linked_thumb" href="' . $link . '" title="' . get_the_title() . '">' . $thumbnail . '</a>';
+						}
+						else {
+							$return_html .= $thumbnail;
+						}
+					}
 				}
 
 
