@@ -1,4 +1,4 @@
-=== CC Child Pages ===
+﻿=== CC Child Pages ===
 
 Plugin Name: CC Child Pages
 Contributors: caterhamcomputing
@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.1
-Stable tag: 1.20
-Version: 1.20
+Stable tag: 1.21
+Version: 1.21
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -138,7 +138,7 @@ If you want to style the child page boxes yourself, you can also specify the `cl
 
 `[child_pages class="myclass"]`
 
-Finally, you can also display just an unordered list (`<ul>`) of child pages by adding the `list` parameter. In this case, all other parameters are ignored **except for `class`, `exclude`, `orderby`, `order` and `id`**.
+Finally, you can also display just an unordered list (`<ul>`) of child pages by adding the `list` parameter. In this case, all other parameters are ignored **except for `class`, `cols`, `exclude`, `orderby`, `order` and `id`**.
 
 `[child_pages list="true"]`
 
@@ -152,6 +152,14 @@ The `depth` parameter accepts the following values:
 * 2, 3 … Displays Pages to the given depth
 
 `[child_pages list="true" depth="4"]`
+
+Specifying the `cols` parameter with `list="true"` will show the child pages as an unordered list ordered into a number of columns (I would recommend avoiding the use of the `depth` parameter when listing child pages within columns - the results are likely to be fairly unreadable!).
+
+`[child_pages list="true" cols="3"]`
+
+The columns are responsive, and should adjust according to the browser being re-sized or the size of the screen being used.
+
+**N.B. Because the shortcode uses the WordPress `wp_list_pages` function to output the list, columns are acheived by applying CSS styling to the functions standard output. This CSS should work fine in modern browsers, but in older browsers (such as Internet Explorer 8) the list will not be split into columns**
 
 == Installation ==
 
@@ -174,6 +182,10 @@ The `depth` parameter accepts the following values:
 12. CC Child Pages widget options
 
 == Changelog ==
+
+= 1.21 =
+* Change to allow `cols` parameter to be used when `list` parameter is set to `true`.
+* Changed `.ccpages_excerpt` container to `<div>` (was `<p>`) to avoid potentially invalid HTML when HTML excerpts are used.
 
 = 1.20 =
 * Change to improve efficiency when the plugin attempts to force thumbnail creation via Video Thumbnails plugin
@@ -257,6 +269,10 @@ The `depth` parameter accepts the following values:
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.21 =
+* Change to allow `cols` parameter to be used when `list` parameter is set to `true`.
+* Changed `.ccpages_excerpt` container to `<div>` (was `<p>`) to avoid potentially invalid HTML when HTML excerpts are used.
 
 = 1.20 =
 * Change to improve efficiency when the plugin attempts to force thumbnail creation via Video Thumbnails plugin

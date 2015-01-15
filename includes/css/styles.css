@@ -27,6 +27,11 @@ a.ccpage_linked_thumb img {
 .ccpages_more {
   font-size: 85%;
 }
+.ccpages_excerpt {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
 .ccfirst {
   clear: both;
 }
@@ -60,8 +65,51 @@ a.ccpage_linked_thumb img {
  * End of Thumbnails
  */
 /*
+ * Rules for nested lists ..
+ */
+.twocol ul.ccchildpages_list li ul,
+.threecol ul.ccchildpages_list li ul,
+.fourcol ul.ccchildpages_list li ul {
+  margin-left: 0;
+  padding-left: 0.5em;
+}
+.twocol ul.ccchildpages_list li ul li,
+.threecol ul.ccchildpages_list li ul li,
+.fourcol ul.ccchildpages_list li ul li {
+  display: list-item;
+  float: none;
+}
+/*
  * Media Queries
  */
+@media screen and (min-width: 761px) {
+  /*
+	 * List items
+	 */
+  .twocol ul.ccchildpages_list li,
+  .threecol ul.ccchildpages_list li,
+  .fourcol ul.ccchildpages_list li {
+    margin: 1em 1% 1em 2%;
+    vertical-align: top;
+  }
+  .twocol ul.ccchildpages_list li {
+    width: 42%;
+    float: left;
+  }
+  .twocol ul.ccchildpages_list li:nth-child(2n+3),
+  .threecol ul.ccchildpages_list li:nth-child(3n+4),
+  .fourcol ul.ccchildpages_list li:nth-child(4n+5) {
+    clear: both;
+  }
+  .threecol ul.ccchildpages_list li {
+    width: 25.333%;
+    float: left;
+  }
+  .fourcol ul.ccchildpages_list li {
+    width: 17%;
+    float: left;
+  }
+}
 @media screen and (min-width: 481px) and (max-width: 760px) {
   /* Undo rules we are not interested in for lower resolutions */
   .fourcol .cclast {
@@ -81,6 +129,29 @@ a.ccpage_linked_thumb img {
   }
   .fourcol .ccchildpage:nth-child(3n+1) {
     clear: both;
+  }
+  /*
+	 * List items
+	 */
+  .twocol ul.ccchildpages_list li,
+  .threecol ul.ccchildpages_list li,
+  .fourcol ul.ccchildpages_list li {
+    margin: 1em 1% 1em 2%;
+    vertical-align: top;
+  }
+  .twocol ul.ccchildpages_list li {
+    width: 42%;
+    float: left;
+  }
+  .twocol ul.ccchildpages_list li:nth-child(2n+3),
+  .threecol ul.ccchildpages_list li:nth-child(3n+4),
+  .fourcol ul.ccchildpages_list li:nth-child(3n+4) {
+    clear: both;
+  }
+  .threecol ul.ccchildpages_list li,
+  .fourcol ul.ccchildpages_list li {
+    width: 25.333%;
+    float: left;
   }
 }
 @media screen and (min-width: 321px) and (max-width: 480px) {
@@ -106,6 +177,26 @@ a.ccpage_linked_thumb img {
   }
   .threecol .ccchildpage:nth-child(2n+1),
   .fourcol .ccchildpage:nth-child(2n+1) {
+    clear: both;
+  }
+  /*
+	 * List items
+	 */
+  .twocol ul.ccchildpages_list li,
+  .threecol ul.ccchildpages_list li,
+  .fourcol ul.ccchildpages_list li {
+    margin: 1em 1% 1em 2%;
+    vertical-align: top;
+  }
+  .twocol ul.ccchildpages_list li,
+  .threecol ul.ccchildpages_list li,
+  .fourcol ul.ccchildpages_list li {
+    width: 42%;
+    float: left;
+  }
+  .twocol ul.ccchildpages_list li:nth-child(2n+3),
+  .threecol ul.ccchildpages_list li:nth-child(2n+3),
+  .fourcol ul.ccchildpages_list li:nth-child(2n+3) {
     clear: both;
   }
 }

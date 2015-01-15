@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.20';
+	const plugin_version = '1.21';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -23,7 +23,7 @@ class ccchildpages {
 
 		$a = shortcode_atts( array(
 			'id'			=> get_the_ID(),
-			'cols'			=> '3',
+			'cols'			=> '',
 			'depth'			=> '1',
 			'exclude'		=> '',
 			'exclude_tree'	=> '',
@@ -45,6 +45,8 @@ class ccchildpages {
 		
 		$depth = intval($a['depth']);
 		
+		if ( strtolower(trim($a['list'])) != 'true' && $a['cols'] == '' ) $a['cols']='3';
+		
 		switch ( $a['cols'] ) {
 			case '4':
 				$class = 'fourcol';
@@ -54,13 +56,17 @@ class ccchildpages {
 				$class = 'threecol';
 				$cols = 3;
 				break;
+			case '2':
+				$class = 'twocol';
+				$cols = 2;
+				break;
 			case '1':
 				$class = 'onecol';
 				$cols = 1;
 				break;
 			default:
-				$class = 'twocol';
-				$cols = 2;
+				$class = '';
+				$cols = 1;
 		}
 		
 		switch ( $a['skin'] ) {
@@ -221,7 +227,7 @@ class ccchildpages {
 		
 			$page_count = 0;		
 
-			$return_html .= '<ul>';
+			$return_html .= '<ul class="ccchildpages_list ccclearfix">';
 						
 			$page_list = trim(wp_list_pages( $args ));
 			
@@ -337,7 +343,7 @@ class ccchildpages {
 						if ( str_word_count(strip_tags($page_excerpt)) > $words ) $page_excerpt = wp_trim_words( $page_excerpt, $words, '...' );
 					}
 				
-					$return_html .= '<p class="ccpages_excerpt">' . $page_excerpt . '</p>';
+					$return_html .= '<div class="ccpages_excerpt">' . $page_excerpt . '</div>';
 				}
 			
 				if ( ! $hide_more ) $return_html .= '<p class="ccpages_more"><a href="' . $link . '" title="' . $more . '">' . $more . '</a></p>';
