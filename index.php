@@ -6,7 +6,7 @@ Description: Show links to child pages
 Author: Caterham Computing
 Text Domain: cc-child-pages
 Domain Path: /languages
-Version: 1.21
+Version: 1.22
 Author URI: http://www.caterhamcomputing.net/
 */
 include_once('includes/ccchildpages.php');

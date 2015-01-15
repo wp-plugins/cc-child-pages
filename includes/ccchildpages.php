@@ -13,13 +13,15 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.21';
+	const plugin_version = '1.22';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
 
 	public static function show_child_pages( $atts ) {
+		// Shortcode has been called, so NOW enqueue the CSS
+		wp_enqueue_style( 'ccchildpagescss' );
 
 		$a = shortcode_atts( array(
 			'id'			=> get_the_ID(),
@@ -339,8 +341,17 @@ class ccchildpages {
 						if ( str_word_count(strip_tags($page_excerpt) ) > $words && $truncate_excerpt ) $page_excerpt = wp_trim_words( $page_excerpt, $words, '...' );
 					}
 					else {
-						$page_excerpt = strip_tags( do_shortcode( get_the_content() ) );
-						if ( str_word_count(strip_tags($page_excerpt)) > $words ) $page_excerpt = wp_trim_words( $page_excerpt, $words, '...' );
+						$page_excerpt = do_shortcode( get_the_content() ); // get full page content
+						
+						if ( str_word_count( wp_trim_words($page_excerpt, $words+10, '') ) > $words ) {
+							// If page content is longer than allowed words, 
+							$trunc = '...';
+						}
+						else {
+							// If page content is within allowe word count, do not add anything to the end of it
+							$trunc = '';
+						}
+						$page_excerpt = wp_trim_words( $page_excerpt, $words, $trunc );
 					}
 				
 					$return_html .= '<div class="ccpages_excerpt">' . $page_excerpt . '</div>';
@@ -362,14 +373,15 @@ class ccchildpages {
 	
 	public static function enqueue_styles() {
 		$css_file = plugins_url( 'css/styles.css' , __FILE__ );
-		if ( !is_admin() ) { 
+		if ( !is_admin() ) {
+			// Register style, but do not enqueue it - we'll do that if the shortcode is used
 			wp_register_style(
 				'ccchildpagescss',
 				$css_file,
 				false,
 				self::plugin_version
 			);
-			wp_enqueue_style( 'ccchildpagescss' );
+			// wp_enqueue_style( 'ccchildpagescss' );
 		}
 	}
 

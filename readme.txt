@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.1
-Stable tag: 1.21
-Version: 1.21
+Stable tag: 1.22
+Version: 1.22
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -183,6 +183,10 @@ The columns are responsive, and should adjust according to the browser being re-
 
 == Changelog ==
 
+= 1.22 =
+* Changes to how excerpts are generated from content when no custom excerpt is specified.
+* Changed how CSS is queued - the CSS file will now only be included in the page if the shortcode is specified, helping to keep page sizes to a minimum.
+
 = 1.21 =
 * Change to allow `cols` parameter to be used when `list` parameter is set to `true`.
 * Changed `.ccpages_excerpt` container to `<div>` (was `<p>`) to avoid potentially invalid HTML when HTML excerpts are used.
@@ -269,6 +273,10 @@ The columns are responsive, and should adjust according to the browser being re-
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.22 =
+* Changes to how excerpts are generated from content when no custom excerpt is specified.
+* Changed how CSS is queued - the CSS file will now only be included in the page if the shortcode is specified, helping to keep page sizes to a minimum.
 
 = 1.21 =
 * Change to allow `cols` parameter to be used when `list` parameter is set to `true`.
