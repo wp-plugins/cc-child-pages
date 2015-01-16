@@ -70,7 +70,7 @@ a.ccpage_linked_thumb img {
 .twocol ul.ccchildpages_list li ul,
 .threecol ul.ccchildpages_list li ul,
 .fourcol ul.ccchildpages_list li ul {
-  margin-left: 0;
+  margin-left: 0.5em;
   padding-left: 0.5em;
 }
 .twocol ul.ccchildpages_list li ul li,
@@ -90,7 +90,8 @@ a.ccpage_linked_thumb img {
   .twocol ul.ccchildpages_list li,
   .threecol ul.ccchildpages_list li,
   .fourcol ul.ccchildpages_list li {
-    margin: 1em 1% 1em 2%;
+    margin-left: 0;
+    margin-right: 3%;
     vertical-align: top;
   }
   .twocol ul.ccchildpages_list li {
@@ -137,7 +138,8 @@ a.ccpage_linked_thumb img {
   .twocol ul.ccchildpages_list li,
   .threecol ul.ccchildpages_list li,
   .fourcol ul.ccchildpages_list li {
-    margin: 1em 1% 1em 2%;
+    margin-left: 0;
+    margin-right: 3%;
     vertical-align: top;
   }
   .twocol ul.ccchildpages_list li {
@@ -186,7 +188,8 @@ a.ccpage_linked_thumb img {
   .twocol ul.ccchildpages_list li,
   .threecol ul.ccchildpages_list li,
   .fourcol ul.ccchildpages_list li {
-    margin: 1em 1% 1em 2%;
+    margin-left: 0;
+    margin-right: 3%;
     vertical-align: top;
   }
   .twocol ul.ccchildpages_list li,
