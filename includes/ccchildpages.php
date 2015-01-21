@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.23';
+	const plugin_version = '1.24';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -509,7 +509,19 @@ class ccchildpages {
 		$links[] = '<a href="https://wordpress.org/support/view/plugin-reviews/cc-child-pages" target="_blank">Rate this plugin...</a>';
 //		$links[] = '<a href="http://www.ccplugins.co.uk" target="_blank">More from CC Plugins</a>';
 		return $links;
-}
+	}
+	
+	public static function plugin_row_meta( $links, $file ) {
+		$current_plugin = basename(dirname($file));
+		
+		if ( $current_plugin =='cc-child-pages' ) {
+			$links[] = '<a href="options-general.php?page=cc-child-pages">' . __('Settings...', 'cc-child-pages') . '</a>';
+			$links[] = '<a href="https://wordpress.org/support/view/plugin-reviews/cc-child-pages" target="_blank">' . __('Rate this plugin...', 'cc-child-pages') . '</a>';
+			$links[] = '<a href="http://ccchildpages.ccplugins.co.uk/donate/" target="_blank">' . __('Donate...', 'cc-child-pages') . '</a> ' . __('(Your donations keep this plugin free &amp; supported)', 'cc-child-pages');
+		}
+
+		return $links;
+	}
 }
 
 /*EOF*/

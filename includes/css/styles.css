@@ -91,11 +91,11 @@ a.ccpage_linked_thumb img {
   .threecol ul.ccchildpages_list li,
   .fourcol ul.ccchildpages_list li {
     margin-left: 0;
-    margin-right: 3%;
+    margin-right: 2%;
     vertical-align: top;
   }
   .twocol ul.ccchildpages_list li {
-    width: 42%;
+    width: 48%;
     float: left;
   }
   .twocol ul.ccchildpages_list li:nth-child(2n+3),
@@ -104,11 +104,11 @@ a.ccpage_linked_thumb img {
     clear: both;
   }
   .threecol ul.ccchildpages_list li {
-    width: 25.333%;
+    width: 31.333%;
     float: left;
   }
   .fourcol ul.ccchildpages_list li {
-    width: 17%;
+    width: 23%;
     float: left;
   }
 }
@@ -139,11 +139,11 @@ a.ccpage_linked_thumb img {
   .threecol ul.ccchildpages_list li,
   .fourcol ul.ccchildpages_list li {
     margin-left: 0;
-    margin-right: 3%;
+    margin-right: 5%;
     vertical-align: top;
   }
   .twocol ul.ccchildpages_list li {
-    width: 42%;
+    width: 45%;
     float: left;
   }
   .twocol ul.ccchildpages_list li:nth-child(2n+3),
@@ -153,7 +153,7 @@ a.ccpage_linked_thumb img {
   }
   .threecol ul.ccchildpages_list li,
   .fourcol ul.ccchildpages_list li {
-    width: 25.333%;
+    width: 28.333%;
     float: left;
   }
 }
@@ -189,13 +189,13 @@ a.ccpage_linked_thumb img {
   .threecol ul.ccchildpages_list li,
   .fourcol ul.ccchildpages_list li {
     margin-left: 0;
-    margin-right: 3%;
+    margin-right: 7%;
     vertical-align: top;
   }
   .twocol ul.ccchildpages_list li,
   .threecol ul.ccchildpages_list li,
   .fourcol ul.ccchildpages_list li {
-    width: 42%;
+    width: 43%;
     float: left;
   }
   .twocol ul.ccchildpages_list li:nth-child(2n+3),

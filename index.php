@@ -6,7 +6,7 @@ Description: Show links to child pages
 Author: Caterham Computing
 Text Domain: cc-child-pages
 Domain Path: /languages
-Version: 1.23
+Version: 1.24
 Author URI: http://www.caterhamcomputing.net/
 */
 include_once('includes/ccchildpages.php');
@@ -33,6 +33,9 @@ add_action ( 'init', 'ccchildpages::show_page_excerpt');
 
 // Add action links for plugin
 add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'ccchildpages::plugin_action_links' );
+
+// Add links to plugin meta
+add_filter( 'plugin_row_meta', 'ccchildpages::plugin_row_meta', 10, 4 );
 
 // Set default option values
 register_activation_hook(__FILE__, 'ccchildpages::options_activation');
