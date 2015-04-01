@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.1
-Stable tag: 1.24
-Version: 1.24
+Stable tag: 1.25
+Version: 1.25
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -31,9 +31,11 @@ You can choose between 1, 2, 3 & 4 column layouts.
 
 CC Child Pages also includes a widget for displaying child pages within your sidebars.
 
-The widget can be set to show the children of the current page or a specific page.
+The widget can be set to show the children of the current page or a specific page, or to show all pages.
 
 Pages can be sorted by their menu order, title or ID. You can also select the depth of pages to be displayed.
+
+You can now also tick the checkbox to show all pages, in which case the widget will behave much like the standard Pages widget but with additional options.
 
 = Using the shortcode =
 
@@ -183,6 +185,10 @@ The columns are responsive, and should adjust according to the browser being re-
 
 == Changelog ==
 
+= 1.25 =
+* New option added to widget to show all top-level pages and their children. This can now be used as a complete replacement for the standard Pages widget
+* New option added to the plugins settings page allowing custom CSS code to be specified from within the plugin. This feature has been requested several times. This functionality will be expanded on in the future.
+
 = 1.24 =
 * Further enhancements to CSS when using both the `list` and `cols` parameters
 
@@ -279,6 +285,10 @@ The columns are responsive, and should adjust according to the browser being re-
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.25 =
+* New option added to widget to show all top-level pages and their children. This can now be used as a complete replacement for the standard Pages widget
+* New option added to the plugins settings page allowing custom CSS code to be specified from within the plugin. This feature has been requested several times. This functionality will be expanded on in the future.
 
 = 1.23 =
 * Minor fix for CSS when using both the `list` and `cols` parameters

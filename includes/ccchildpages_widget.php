@@ -28,10 +28,15 @@ class ccchildpages_widget extends WP_Widget {
 
 		$sortby = empty( $instance['sortby'] ) ? 'menu_order' : $instance['sortby'];
 		$exclude = empty( $instance['exclude'] ) ? '' : $instance['exclude'];
+		$showall = empty( $instance['showall'] ) ? 'off' : $instance['showall'];
 		$parent_id = empty( $instance['parent'] ) ? -1 : $instance['parent'];
 		$depth = empty( $instance['depth'] ) ? 0 : $instance['depth'];
 		
-		if ( $parent_id == -1 ) $parent_id = get_the_ID();
+		
+		if ( $showall != 'off' ) {
+			$parent_id = 0;
+		}
+		else if ( $parent_id == -1 ) $parent_id = get_the_ID();
 
 		if ( $sortby == 'menu_order' )
 			$sortby = 'menu_order, post_title';
@@ -93,6 +98,11 @@ class ccchildpages_widget extends WP_Widget {
 			<small><?php _e( 'Page IDs, separated by commas.', 'cc-child-pages' ); ?></small>
 		</p>
 		<p>
+			<label for="<?php echo $this->get_field_id('showall'); ?>"><?php _e( 'Show All Pages:', 'cc-child-pages' ); ?></label> <input type="checkbox" <?php checked($instance['showall'], 'on'); ?> name="<?php echo $this->get_field_name('showall'); ?>" id="<?php echo $this->get_field_id('showall'); ?>" class="checkbox" />
+			<br />
+			<small><?php _e( 'Overrides the Parent field, shows all top-level pages.', 'cc-child-pages' ); ?></small>
+		</p>
+		<p>
 <?php
 $args = array(
 	'depth'					=> $depth,
@@ -143,6 +153,8 @@ $args = array(
 		}
 
 		$instance['exclude'] = strip_tags( $new_instance['exclude'] );
+
+		$instance['showall'] = $new_instance['showall'];
 
 		return $instance;
 	}

@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.24';
+	const plugin_version = '1.25';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -450,6 +450,7 @@ class ccchildpages {
 	public static function options_activation () {
 		$options = array();
 		$options['show_button'] = 'true';
+		$options['customcss'] = '';
 		
 		add_option('cc_child_pages', $options, '', 'yes');
 	}
@@ -482,17 +483,34 @@ class ccchildpages {
 				else if ( $options['show_button'] == 'true' ) {
 					$show_button = TRUE;
 				}
+				
+				$customcss = $options['customcss'];
 			}
 			else {
 				$show_button = TRUE;
+				$customcss = '';
 			}
 		?>
 		<h2><?php _e('CC Child Pages options', 'cc-child-pages' ) ?></h2>
-		<p><label>Add button to the visual editor: <input type="radio" name="cc_child_pages[show_button]" value="true" <?php checked(TRUE,$show_button) ?> > Yes <input type="radio" name="cc_child_pages[show_button]" value="false" <?php checked(FALSE,$show_button) ?> > No</label></p>
-		<p class="submit"><input  type="submit" name="submit" class="button-primary" value="Update Options" /></p>
+		<p><label><?php _e( 'Add button to the visual editor:', 'cc-child-pages' ); ?> <input type="radio" name="cc_child_pages[show_button]" value="true" <?php checked(TRUE,$show_button) ?> > Yes <input type="radio" name="cc_child_pages[show_button]" value="false" <?php checked(FALSE,$show_button) ?> > No</label></p>
+		<p><label><?php _e( 'Custom CSS:', 'cc-child-pages' ); ?><br /><textarea name="cc_child_pages[customcss]" class="large-text code" rows="10"><?php echo htmlentities($customcss) ?></textarea></label></p>
+		<p class="submit"><input  type="submit" name="submit" class="button-primary" value="<?php _e('Update Options','cc-child-pages'); ?>" /></p>
 	</form>
 </div>
 <?php
+	}
+	
+	/*
+	 * Output Custom CSS
+	 */
+	public static function custom_css() {
+		if ( $options = get_option('cc_child_pages') ) {
+			if ( ! empty($options['customcss'])) {
+				if ( trim($options['customcss']) != '' ) {
+					echo "<style>\n" . $options['customcss'] . "\n</style>\n";
+				}
+			}
+		}
 	}
 	
 	/*
