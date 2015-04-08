@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.1
-Stable tag: 1.25
-Version: 1.25
+Stable tag: 1.26
+Version: 1.26
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -185,6 +185,11 @@ The columns are responsive, and should adjust according to the browser being re-
 
 == Changelog ==
 
+= 1.26 =
+* The CSS for displaying child pages has been re-written to allow for custom CSS to be more easily written - for example, specifying a border should no longer cause problems in the responsive layout. Fallbacks have been put in place for older versions of Internet Explorer.
+* The handling of Custom CSS from the settings page has been improved.
+* The loading of the plugin CSS has been returned to the default manner. While this means that CSS is loaded on pages where the shortcode is not used, it means that the CSS can be correctly minified by other plugins and ensures that valid HTML is generated.
+
 = 1.25 =
 * New option added to widget to show all top-level pages and their children. This can now be used as a complete replacement for the standard Pages widget
 * New option added to the plugins settings page allowing custom CSS code to be specified from within the plugin. This feature has been requested several times. This functionality will be expanded on in the future.
@@ -285,6 +290,11 @@ The columns are responsive, and should adjust according to the browser being re-
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.26 =
+* The CSS for displaying child pages has been re-written to allow for custom CSS to be more easily written - for example, specifying a border should no longer cause problems in the responsive layout. Fallbacks have been put in place for older versions of Internet Explorer.
+* The handling of Custom CSS from the settings page has been improved.
+* The loading of the plugin CSS has been returned to the default manner. While this means that CSS is loaded on pages where the shortcode is not used, it means that the CSS can be correctly minified by other plugins and ensures that valid HTML is generated.
 
 = 1.25 =
 * New option added to widget to show all top-level pages and their children. This can now be used as a complete replacement for the standard Pages widget

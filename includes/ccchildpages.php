@@ -13,15 +13,15 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.25';
+	const plugin_version = '1.26';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
 
 	public static function show_child_pages( $atts ) {
-		// Shortcode has been called, so NOW enqueue the CSS
-		wp_enqueue_style( 'ccchildpagescss' );
+		// Shortcode has been called, so NOW enqueue the CSS - removed: causes <link> tag to be output outside of the <head> area
+		// wp_enqueue_style( 'ccchildpagescss' );
 
 		$a = shortcode_atts( array(
 			'id'			=> get_the_ID(),
@@ -373,15 +373,43 @@ class ccchildpages {
 	
 	public static function enqueue_styles() {
 		$css_file = plugins_url( 'css/styles.css' , __FILE__ );
+		$css_skin_file = plugins_url( 'css/skins.css' , __FILE__ );
+		$css_conditional_file = plugins_url( 'css/styles.ie.css' , __FILE__ );
 		if ( !is_admin() ) {
-			// Register style, but do not enqueue it - we'll do that if the shortcode is used
+			// Load main styles
 			wp_register_style(
 				'ccchildpagescss',
 				$css_file,
 				false,
 				self::plugin_version
 			);
-			// wp_enqueue_style( 'ccchildpagescss' );
+			wp_enqueue_style( 'ccchildpagescss' );
+			
+			// Load skins
+			wp_register_style(
+				'ccchildpagesskincss',
+				$css_skin_file,
+				false,
+				self::plugin_version
+			);
+			wp_enqueue_style( 'ccchildpagesskincss' );
+			
+			// Conditionally load fallback for older versions of Internet Explorer
+			wp_register_style(
+				'ccchildpagesiecss',
+				$css_conditional_file,
+				false,
+				self::plugin_version
+			);
+			wp_enqueue_style( 'ccchildpagesiecss' );
+			wp_style_add_data( 'ccchildpagesiecss', 'conditional', 'lt IE 8' );
+			
+			// Load custom CSS
+			$custom_css = self::custom_css();
+			
+			if ( $custom_css != '' ) {
+				wp_add_inline_style( 'ccchildpagesskincss', $custom_css );
+			}
 		}
 	}
 
@@ -484,7 +512,7 @@ class ccchildpages {
 					$show_button = TRUE;
 				}
 				
-				$customcss = $options['customcss'];
+				$customcss = empty( $options['customcss'] ) ? '' : $options['customcss'];
 			}
 			else {
 				$show_button = TRUE;
@@ -504,13 +532,15 @@ class ccchildpages {
 	 * Output Custom CSS
 	 */
 	public static function custom_css() {
+		$custom_css = '';
 		if ( $options = get_option('cc_child_pages') ) {
 			if ( ! empty($options['customcss'])) {
 				if ( trim($options['customcss']) != '' ) {
-					echo "<style>\n" . $options['customcss'] . "\n</style>\n";
+					$custom_css = trim( $options['customcss'] );
 				}
 			}
 		}
+		return $custom_css;
 	}
 	
 	/*
