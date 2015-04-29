@@ -13,13 +13,17 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.26';
+	const plugin_version = '1.27';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
 
 	public static function show_child_pages( $atts ) {
+		// Store image size details in case we need to output Video Thumbnails, etc. which may be external files
+		$img_sizes = get_intermediate_image_sizes();
+		$img_sizes[] = 'full'; // allow "virtual" image size ...
+		
 		// Shortcode has been called, so NOW enqueue the CSS - removed: causes <link> tag to be output outside of the <head> area
 		// wp_enqueue_style( 'ccchildpagescss' );
 
@@ -42,9 +46,19 @@ class ccchildpages {
 			'link_thumbs'	=> 'false',
 			'thumbs'		=> 'false',
 			'more'			=> __('Read more ...', 'cc-child-pages'),
-			'words'	=> 55,
+			'siblings'		=> 'false',
+			'words'			=> 55,
 		), $atts );
-		
+				
+		// If we are displaying siblings, set starting point to page parent and add current page to exclude list
+		if ( strtolower(trim($a['siblings'])) == 'true' ) {
+			$a['id'] = wp_get_post_parent_id( get_the_ID() ) ? wp_get_post_parent_id( get_the_ID() ) : 0;
+			
+			if ( $a['exclude'] != '' ) $a['exclude'] .= ',';
+			
+			$a['exclude'] .= get_the_ID();
+		}
+
 		$depth = intval($a['depth']);
 		
 		if ( strtolower(trim($a['list'])) != 'true' && $a['cols'] == '' ) $a['cols']='3';
@@ -201,9 +215,6 @@ class ccchildpages {
 		else {
 			$thumbs = strtolower(trim($a['thumbs']));
 			
-			$img_sizes = get_intermediate_image_sizes();
-			$img_sizes[] = 'full'; // allow "virtual" image size ...
-			
 			if ( ! in_array( $thumbs, $img_sizes ) ) $thumbs = 'medium';
 		}
 		
@@ -211,9 +222,9 @@ class ccchildpages {
 		
 		// if class is specified, substitue value for skin class
 		if ( $a['class'] != '' ) $skin = trim(esc_html($a['class']));
-		
+				
 		$return_html = '<div class="ccchildpages ' . $class .' ' . $skin . ' ccclearfix">';
-
+		
 		$page_id = $a['id'];
 
 		if ( $list ) {	
@@ -239,7 +250,7 @@ class ccchildpages {
 			
 			$return_html .= '</ul>';
 		}
-		else {				
+		else {
 			$args = array(
 				'post_type'      => 'page',
 				'posts_per_page' => -1,
@@ -314,10 +325,33 @@ class ccchildpages {
 						if ( class_exists('Video_Thumbnails') && function_exists( 'get_video_thumbnail' ) ) {
 							// Call get_video_thumbnail to generate video thumbnail
 							$video_img = get_video_thumbnail($id);
+							
+							// If we got a result, display the image
+							if ( $video_img != '' ) {
+								
+								// First, try to pick up the thumbnail in case it has been regenerated (may be the case if automatic featured image is turned on)
+								$thumbnail = get_the_post_thumbnail($id, $thumbs, $thumb_attr);
+								
+								// If thumnail hasn't been regenerated, use Video Thumbnail (may be the full size image)
+								if ( $thumbnail == '' ) {
+									// Get image size
+									$img_width = '';
+									$img_height = '';
+								
+									$img_dims = self::get_image_dimensions($thumbs);
+								
+									if ( isset($img_dims['width']) ) {
+										$img_width = 'width="' . $img_dims['width'] . '"';
+									}
+									if ( isset($img_dims['height']) ) {
+										$img_height = 'height="' . $img_dims['height'] . '"';
+									}
+								
+									$thumbnail .= '<img src="' . $video_img . '" ' . $img_height . ' ' . $img_width . ' alt="' . get_the_title() . '" />';
+								}
+							}
 						}
 						
-						// Try getting post thumbnail again
-						$thumbnail = get_the_post_thumbnail($id, $thumbs, $thumb_attr);
 					}
 					
 					// If thumbnail is found, display it.
@@ -524,6 +558,7 @@ class ccchildpages {
 		<p><label><?php _e( 'Custom CSS:', 'cc-child-pages' ); ?><br /><textarea name="cc_child_pages[customcss]" class="large-text code" rows="10"><?php echo htmlentities($customcss) ?></textarea></label></p>
 		<p class="submit"><input  type="submit" name="submit" class="button-primary" value="<?php _e('Update Options','cc-child-pages'); ?>" /></p>
 	</form>
+
 </div>
 <?php
 	}
@@ -548,6 +583,27 @@ class ccchildpages {
 	 */
 	public static function show_page_excerpt () {
 		add_post_type_support( 'page', 'excerpt' );
+	}
+	
+	/*
+	 * Get size information for thumbnail by size
+	 */
+	private static function get_image_dimensions($thumbs) {
+		global $_wp_additional_image_sizes;
+		
+		$dimensions = array();
+		
+		// If a default image size, use get options method
+		if ( in_array( $thumbs, array( 'thumbnail', 'medium', 'large' ) ) ) {
+			$dimensions['height'] = get_option( $thumbs . '_size_h' );
+			$dimensions['width'] = get_option( $thumbs . '_size_w' );
+		}
+		elseif ( isset( $_wp_additional_image_sizes[ $thumbs ] ) ) {
+			$dimensions['height'] = $_wp_additional_image_sizes[ $thumbs ]['height'];
+			$dimensions['width'] = $_wp_additional_image_sizes[ $thumbs ]['width'];
+		}
+		
+		return $dimensions;
 	}
 	
 	/*

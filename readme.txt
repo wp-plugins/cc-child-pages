@@ -6,10 +6,10 @@ Plugin URI: http://ccchildpages.ccplugins.co.uk/
 Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
-Tested up to: 4.1
-Stable tag: 1.26
-Version: 1.26
-Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages
+Tested up to: 4.2.1
+Stable tag: 1.27
+Version: 1.27
+Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages, siblings, sibling pages
 
 Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
 
@@ -163,6 +163,20 @@ The columns are responsive, and should adjust according to the browser being re-
 
 **N.B. Because the shortcode uses the WordPress `wp_list_pages` function to output the list, columns are acheived by applying CSS styling to the functions standard output. This CSS should work fine in modern browsers, but in older browsers (such as Internet Explorer 8) the list will not be split into columns**
 
+=Sibling Pages=
+
+The shortcode also allows you to display sibling pages (those at the same level as the current page within the hierarchy).
+
+To do this, set the `siblings` parameter to `true`.
+
+This will override the `id` parameter and will append the current page to the `exclude` parameter.
+
+`[child_pages siblings="true"]`
+
+This can also be used with the `list` parameter
+
+`[child_pages siblings="true" list="true"]`
+
 == Installation ==
 
 1. Upload the plugin to the `/wp-content/plugins/` directory
@@ -184,6 +198,11 @@ The columns are responsive, and should adjust according to the browser being re-
 12. CC Child Pages widget options
 
 == Changelog ==
+
+= 1.27 =
+* Added the `siblings` parameter to show siblings of current page
+* Improved integration when used with Video Thumbnails plugin
+* Minor bug fixes for CC Child Pages Widget
 
 = 1.26 =
 * The CSS for displaying child pages has been re-written to allow for custom CSS to be more easily written - for example, specifying a border should no longer cause problems in the responsive layout. Fallbacks have been put in place for older versions of Internet Explorer.
@@ -290,6 +309,11 @@ The columns are responsive, and should adjust according to the browser being re-
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.27 =
+* Added the `siblings` parameter to show siblings of current page
+* Improved integration when used with Video Thumbnails plugin
+* Minor bug fixes for CC Child Pages Widget
 
 = 1.26 =
 * The CSS for displaying child pages has been re-written to allow for custom CSS to be more easily written - for example, specifying a border should no longer cause problems in the responsive layout. Fallbacks have been put in place for older versions of Internet Explorer.

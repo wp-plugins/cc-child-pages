@@ -69,14 +69,11 @@ class ccchildpages_widget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		// outputs the options form on admin
-		if ( isset( $instance[ 'title' ] ) ) {
-			$title = $instance[ 'title' ];
-		}
-		else {
-			$title = __( 'New title', 'cc-child-pages' );
-		}
 		
+		$title = ( isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'New title', 'cc-child-pages' ) );
 		$exclude = ( isset( $instance['exclude'] ) ? $instance['exclude'] : '' );
+		$sortby = ( isset( $instance['sortby'] ) ? $instance['sortby'] : '' );
+		$showall = ( isset( $instance['showall'] ) ? $instance['showall'] : 'off' );
 		$parent_id = ( isset( $instance['parent'] ) ? intval($instance['parent']) : -1 );
 		$depth = ( isset( $instance['depth'] ) ? intval($instance['depth']) : 0 );
 		?>
@@ -87,9 +84,9 @@ class ccchildpages_widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id('sortby'); ?>"><?php _e( 'Sort by:', 'cc-child-pages' ); ?></label>
 			<select name="<?php echo $this->get_field_name('sortby'); ?>" id="<?php echo $this->get_field_id('sortby'); ?>" class="widefat">
-				<option value="post_title"<?php selected( $instance['sortby'], 'post_title' ); ?>><?php _e('Page title', 'cc-child-pages'); ?></option>
-				<option value="menu_order"<?php selected( $instance['sortby'], 'menu_order' ); ?>><?php _e('Page order', 'cc-child-pages'); ?></option>
-				<option value="ID"<?php selected( $instance['sortby'], 'ID' ); ?>><?php _e( 'Page ID', 'cc-child-pages' ); ?></option>
+				<option value="post_title"<?php selected( $sortby, 'post_title' ); ?>><?php _e('Page title', 'cc-child-pages'); ?></option>
+				<option value="menu_order"<?php selected( $sortby, 'menu_order' ); ?>><?php _e('Page order', 'cc-child-pages'); ?></option>
+				<option value="ID"<?php selected( $sortby, 'ID' ); ?>><?php _e( 'Page ID', 'cc-child-pages' ); ?></option>
 			</select>
 		</p>
 		<p>
@@ -98,7 +95,7 @@ class ccchildpages_widget extends WP_Widget {
 			<small><?php _e( 'Page IDs, separated by commas.', 'cc-child-pages' ); ?></small>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id('showall'); ?>"><?php _e( 'Show All Pages:', 'cc-child-pages' ); ?></label> <input type="checkbox" <?php checked($instance['showall'], 'on'); ?> name="<?php echo $this->get_field_name('showall'); ?>" id="<?php echo $this->get_field_id('showall'); ?>" class="checkbox" />
+			<label for="<?php echo $this->get_field_id('showall'); ?>"><?php _e( 'Show All Pages:', 'cc-child-pages' ); ?></label> <input type="checkbox" <?php checked($showall, 'on'); ?> name="<?php echo $this->get_field_name('showall'); ?>" id="<?php echo $this->get_field_id('showall'); ?>" class="checkbox" />
 			<br />
 			<small><?php _e( 'Overrides the Parent field, shows all top-level pages.', 'cc-child-pages' ); ?></small>
 		</p>
