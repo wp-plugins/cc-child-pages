@@ -1,4 +1,4 @@
-﻿=== CC Child Pages ===
+=== CC Child Pages ===
 
 Plugin Name: CC Child Pages
 Contributors: caterhamcomputing
@@ -11,7 +11,7 @@ Stable tag: 1.27
 Version: 1.27
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages, siblings, sibling pages
 
-Adds a responsive shortcode to list child pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
+Adds a responsive shortcode to list child and sibling pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
 
 == Description ==
 
@@ -163,7 +163,7 @@ The columns are responsive, and should adjust according to the browser being re-
 
 **N.B. Because the shortcode uses the WordPress `wp_list_pages` function to output the list, columns are acheived by applying CSS styling to the functions standard output. This CSS should work fine in modern browsers, but in older browsers (such as Internet Explorer 8) the list will not be split into columns**
 
-=Sibling Pages=
+= Sibling Pages =
 
 The shortcode also allows you to display sibling pages (those at the same level as the current page within the hierarchy).
 
