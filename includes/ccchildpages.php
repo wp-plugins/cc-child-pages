@@ -13,7 +13,7 @@ class ccchildpages {
 	const plugin_name = 'CC Child Pages';
 
 	// Plugin version
-	const plugin_version = '1.27';
+	const plugin_version = '1.28';
 	
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'cc-child-pages', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -23,9 +23,6 @@ class ccchildpages {
 		// Store image size details in case we need to output Video Thumbnails, etc. which may be external files
 		$img_sizes = get_intermediate_image_sizes();
 		$img_sizes[] = 'full'; // allow "virtual" image size ...
-		
-		// Shortcode has been called, so NOW enqueue the CSS - removed: causes <link> tag to be output outside of the <head> area
-		// wp_enqueue_style( 'ccchildpagescss' );
 
 		$a = shortcode_atts( array(
 			'id'			=> get_the_ID(),
@@ -334,20 +331,17 @@ class ccchildpages {
 								
 								// If thumnail hasn't been regenerated, use Video Thumbnail (may be the full size image)
 								if ( $thumbnail == '' ) {
-									// Get image size
-									$img_width = '';
-									$img_height = '';
-								
-									$img_dims = self::get_image_dimensions($thumbs);
-								
-									if ( isset($img_dims['width']) ) {
-										$img_width = 'width="' . $img_dims['width'] . '"';
+									
+									// First, try and find the attachment ID from the URL
+									$attachment_id = self::get_attachment_id($video_img);
+									
+									if ( $attachment_id != FALSE ) {
+										// Attachment found, get thumbnail
+										$thumbnail = wp_get_attachment_image( $attachment_id, $thumbs ) . "\n\n<!-- Thumbnail attachment -->\n\n";
 									}
-									if ( isset($img_dims['height']) ) {
-										$img_height = 'height="' . $img_dims['height'] . '"';
+									else {
+										$thumbnail .= '<img src="' . $video_img . '" alt="' . get_the_title() . '" />';
 									}
-								
-									$thumbnail .= '<img src="' . $video_img . '" ' . $img_height . ' ' . $img_width . ' alt="' . get_the_title() . '" />';
 								}
 							}
 						}
@@ -382,7 +376,7 @@ class ccchildpages {
 							$trunc = '...';
 						}
 						else {
-							// If page content is within allowe word count, do not add anything to the end of it
+							// If page content is within allowed word count, do not add anything to the end of it
 							$trunc = '';
 						}
 						$page_excerpt = wp_trim_words( $page_excerpt, $words, $trunc );
@@ -583,6 +577,47 @@ class ccchildpages {
 	 */
 	public static function show_page_excerpt () {
 		add_post_type_support( 'page', 'excerpt' );
+	}
+	
+	/*
+	 * Get Attachment ID from URL
+	 */
+	public static function get_attachment_id( $url ) {
+		$dir = wp_upload_dir();
+		
+		// baseurl never has a trailing slash
+		if ( FALSE === strpos( $url, $dir['baseurl'] . '/' ) ) {
+			// URL points to a place outside of upload directory
+			return FALSE;
+		}
+		
+		$file  = basename( $url );
+		$query = array(
+			'post_type'  => 'attachment',
+			'fields'     => 'ids',
+			'meta_query' => array(
+				array(
+					'value'   => $file,
+					'compare' => 'LIKE',
+				),#
+			)
+		);
+
+		$query['meta_query'][0]['key'] = '_wp_attached_file';
+		
+		// query attachments
+		$ids = get_posts( $query );
+		
+		if ( ! empty( $ids ) ) {
+			foreach ( $ids as $id ) {
+				// first entry of returned array is the URL
+				$tmp_url = wp_get_attachment_image_src( $id, 'full' );
+				if ( $url === array_shift( $tmp_url ) )
+					return $id;
+			}
+		}
+		
+		return FALSE;
 	}
 	
 	/*

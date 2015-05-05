@@ -1,4 +1,4 @@
-=== CC Child Pages ===
+﻿=== CC Child Pages ===
 
 Plugin Name: CC Child Pages
 Contributors: caterhamcomputing
@@ -7,8 +7,8 @@ Author URI: http://www.caterhamcomputing.net/
 Donate Link: http://ccchildpages.ccplugins.co.uk/donate/
 Requires at least: 4.0
 Tested up to: 4.2.1
-Stable tag: 1.27
-Version: 1.27
+Stable tag: 1.28
+Version: 1.28
 Tags: child pages widget, child pages shortcode, child pages, child page, shortcode, widget, list, sub-pages, subpages, sub-page, subpage, sub page, responsive, child-page, child-pages, childpage, childpages, siblings, sibling pages
 
 Adds a responsive shortcode to list child and sibling pages. Pre-styled or specify your own CSS class for custom styling. Includes child pages widget.
@@ -199,6 +199,9 @@ This can also be used with the `list` parameter
 
 == Changelog ==
 
+= 1.28 =
+* Further improvements to integration when used with Video Thumbnails plugin
+
 = 1.27 =
 * Added the `siblings` parameter to show siblings of current page
 * Improved integration when used with Video Thumbnails plugin
@@ -309,6 +312,9 @@ This can also be used with the `list` parameter
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.28 =
+* Further improvements to integration when used with Video Thumbnails plugin
 
 = 1.27 =
 * Added the `siblings` parameter to show siblings of current page
